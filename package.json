@@ -1,0 +1,26 @@
+{
+  "name": "project-tech",
+  "version": "1.0.0",
+  "description": "project-tech",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MilanSteman/project-tech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MilanSteman/project-tech/issues"
+  },
+  "homepage": "https://github.com/MilanSteman/project-tech#readme",
+  "dependencies": {
+    "camelcase": "^5.3.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
