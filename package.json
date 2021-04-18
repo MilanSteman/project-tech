@@ -5,15 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MilanSteman/project-tech.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Milan Steman",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MilanSteman/project-tech/issues"
   },
