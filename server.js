@@ -8,7 +8,7 @@ nunjucks.configure('views', {
   express: app
 });
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   let data = {
     message: 'Hello world!',
     title: 'Home',
@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
   }
 
   res.render('home.njk', data)
-});
+})
 
 //middelware
 app.use(express.static('static/public'))
@@ -35,7 +35,7 @@ app.get('/movies/:movieId/:slug', (req, res) => {
 })
 
 //middleware
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send("<h1>Sorry, we can't find that page!</h1>")
 })
 
