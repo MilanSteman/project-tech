@@ -1,4 +1,4 @@
-# project-tech &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)][license-url]
+# project-tech &middot; ![](https://img.shields.io/badge/license-MIT-blue.svg)[](./LICENSE)
 ## Description
 Todo.
 
