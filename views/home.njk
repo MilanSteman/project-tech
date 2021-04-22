@@ -1,4 +1,4 @@
-{% extends  "layouts/layout.nunjucks" %}
+{% extends  "layouts/layout.njk" %}
 {% block  content %}
   <h1>{{message}}</h1>
 
@@ -6,6 +6,6 @@
     <p>{{description}}</p>
 
     {% else %}
-      <p>{% include "partials/error.nunjucks" %}</p>
+      <p>{% include "partials/error.njk" %}</p>
   {% endif %}
 {% endblock %}
