@@ -1,0 +1,14 @@
+// Imports
+@import '../1-settings/_global.scss';
+
+// Phone Size
+@media (max-width: 600px) {
+    // Standard padding left and right
+    body > header, body > main, body > footer {
+        padding: 0 $padding;
+    }
+
+    body > main {
+        margin: $margin 0;
+    }
+}

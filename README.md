@@ -1,4 +1,4 @@
-# project-tech &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+# Konnekt &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 ## Description
 Todo.
 
@@ -19,7 +19,9 @@ $ git clone https://github.com/MilanSteman/project-tech.git
 Start de applicatie via:
 ```
 $ npm start
+Example app listening at http://localhost:3000
 ```
+
 ## Documentation
 De documentatie is op [de wiki](https://github.com/MilanSteman/project-tech/wiki) te vinden.
 

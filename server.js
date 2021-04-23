@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
   let data = {
     message: 'Hello world!',
     title: 'Home',
-    authorised: false,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque varius hendrerit gravida. Donec at pharetra ex. Aliquam vel posuere libero. In id enim ut enim fermentum vehicula quis eu ante.'
+    authorised: true,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   }
 
   res.render('home.njk', data)

@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/MilanSteman/project-tech.git"
   },
-  "keywords": [],
+  "keywords": ["matching-app"],
   "author": "Milan Steman",
   "license": "MIT",
   "bugs": {

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../2-design-tokens/spacing.scss"
+    ],
+    "names": [],
+    "file": "spacing.css"
+}

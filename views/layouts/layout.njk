@@ -10,9 +10,15 @@
 </head>
 
 <body>
-    {% block  content %}
+    <!-- Header -->
+    {% include "../partials/header.njk" %}
+
+    <!-- Content -->
+    <main>
+        {% block  content %}
     
-    {% endblock %}
+        {% endblock %}
+    </main>
 </body>
 
 </html>

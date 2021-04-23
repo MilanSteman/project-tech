@@ -1,0 +1,16 @@
+// Imports
+@import '../1-settings/_global.scss';
+
+// Background colors
+body {
+    background-color: $darkest-gray;
+}
+
+body > header, body > footer {
+    background-color: $dark-gray;
+}
+
+// Typography colors
+h1, h2, h3, h4, h5, h6, p {
+    color: $light-gray;
+}
