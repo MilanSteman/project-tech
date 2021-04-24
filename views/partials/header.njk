@@ -1,13 +1,17 @@
 <header>
     <nav>
         <!-- Hamburger menu -->
-        <a class='hamburger-menu'>
+        <a class='hamburger-menu' tabindex="0">
             <span></span>
         </a>
 
         <!-- Primary Navigation -->
         <ul>
-            <li><a href='/'>Home</a></li>
+            <li><a href='/profile'><img src='images/profile-picture.jpg' alt='Profile Picture'></a></li>
+            <li><span class='display-name'>{{ displayname }}</span><a class='user-name' href='/profile'>@{{ username }}</a></li>
+            <li><a href='/'><span class="material-icons">home</span>Home</a></li>
+            <li><a href='/'><span class="material-icons">explore</span>Ontdek</a></li>
+            <li><a href='/'><span class="material-icons">person</span>Profiel</a></li>
         </ul>
 
          <!-- Overlay for mobile navigation -->

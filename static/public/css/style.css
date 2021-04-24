@@ -29,14 +29,14 @@ body, main, header, footer {
 }
 
 body, body > header nav ul {
-  background-color: #313337;
+  background-color: #212121;
 }
 
 body > header, body > footer {
-  background-color: #1E2024;
+  background-color: #313337;
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, span {
   color: #E8EAED;
 }
 
@@ -63,7 +63,7 @@ body, main, header, footer {
   }
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, span {
   font-family: 'Roboto', 'segoe ui', tahoma, sans-serif;
 }
 
@@ -125,15 +125,15 @@ body, main, header, footer {
     left: 0.25em;
   }
   body > header nav .hamburger-menu span::before {
-    bottom: -.5em;
+    bottom: -0.45em;
   }
   body > header nav .hamburger-menu span::after {
-    top: -0.5em;
+    top: -0.45em;
   }
   body > header nav .hamburger-menu span, body > header nav .hamburger-menu span::before, body > header nav .hamburger-menu span::after {
     content: '';
-    width: 1.75em;
-    height: 0.2em;
+    width: 1.5em;
+    height: 0.15em;
     position: absolute;
     background-color: #E8EAED;
   }
@@ -147,15 +147,45 @@ body, main, header, footer {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 4em 1em 1em 1em;
+    padding: 4em 0;
     z-index: 100;
   }
   body > header nav ul li {
     width: 100%;
   }
   body > header nav ul li a {
-    display: block;
-    padding: 0.5em 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0.75em 1em;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-size: 16px;
+  }
+  body > header nav ul li a img {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  body > header nav ul li a span.material-icons {
+    font-size: 28px;
+    margin-right: 1em;
+  }
+  body > header nav ul li span.display-name {
+    font-weight: 500;
+    padding: 0 1em;
+  }
+  body > header nav ul li a.user-name {
+    padding-top: 0;
+    margin-top: 4px;
+    padding-bottom: 12px;
+    color: #7C8183;
+    font-weight: 400;
+    font-size: 14px;
+    border-bottom: 1px solid #313337;
   }
   body > header nav .overlay {
     width: 100%;
@@ -169,6 +199,8 @@ body, main, header, footer {
     -webkit-transition: 0.7s;
     transition: 0.7s;
     z-index: 1;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
   }
   body > header nav .outside {
     width: 100%;
@@ -181,6 +213,8 @@ body, main, header, footer {
   }
   body > header nav .show-overlay {
     opacity: 1;
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
   }
   body > header nav .show-outside {
     display: block;

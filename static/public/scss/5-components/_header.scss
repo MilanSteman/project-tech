@@ -31,18 +31,18 @@
     
                 // Before element for bottom hamburger stripe
                 span::before {
-                    bottom: -.5em;
+                    bottom: -0.45em;
                 }
     
                 // After element for top hamburger stripe
                 span::after {
-                    top: -0.5em;
+                    top: -0.45em;
                 }
     
                 span, span::before, span::after {
                     content: '';
-                    width: 1.75em;
-                    height: 0.2em;
+                    width: 1.5em;
+                    height: 0.15em;
                     position: absolute;
                     background-color: $lightest-gray;
                 }
@@ -57,15 +57,44 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                padding: 4em $padding $padding $padding;
+                padding: 4em 0;
                 z-index: 100;
 
                 li {
                     width: 100%;
 
                     a {
-                        display: block;
-                        padding: $padding-smaller 0;
+                        display: flex;
+                        padding: $padding-small $padding;
+                        align-items: center;
+                        font-size: 16px;
+
+                        img {
+                            width: 3.5em;
+                            height: 3.5em;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+                        span.material-icons {
+                            font-size: 28px;
+                            margin-right: $margin;
+                        }
+                    }
+
+                    span.display-name {
+                        font-weight: 500;
+                        padding: 0 $padding;
+                    }
+
+                    a.user-name {
+                        padding-top: 0;
+                        margin-top: 4px;
+                        padding-bottom: 12px;
+                        color: $light-gray;
+                        font-weight: 400;
+                        font-size: 14px;
+                        border-bottom: 1px solid $dark-gray;
                     }
                 }
             }
@@ -81,6 +110,7 @@
                 opacity: 0;
                 transition: 0.7s;
                 z-index: 1;
+                transform: translateX(-100%)
             }
 
             // Outside area to trigger click events but still have a smooth animation.
@@ -97,6 +127,7 @@
             // Classes for toggling menu
             .show-overlay {
                 opacity: 1;
+                transform: translateX(0%)
             }
 
             .show-outside {

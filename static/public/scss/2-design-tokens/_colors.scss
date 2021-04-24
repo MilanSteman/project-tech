@@ -3,14 +3,14 @@
 
 // Background colors
 body, body > header nav ul {
-    background-color: $dark-gray;
-}
-
-body > header, body > footer {
     background-color: $darkest-gray;
 }
 
+body > header, body > footer {
+    background-color: $dark-gray;
+}
+
 // Typography colors
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, span {
     color: $lightest-gray;
 }

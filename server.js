@@ -10,10 +10,12 @@ nunjucks.configure('views', {
 
 app.get('/', (req, res) => {
   let data = {
-    message: 'Hello world!',
+    message: 'Hello, Milan!',
     title: 'Home',
     authorised: true,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    username: 'milannn',
+    displayname: 'milan'
   }
 
   res.render('home.njk', data)
