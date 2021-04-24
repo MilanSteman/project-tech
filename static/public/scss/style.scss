@@ -20,16 +20,3 @@
 
 @import
     '5-components/_header.scss';
-
-// Default CSS
-*, *::after, *::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    text-decoration: none;
-}
-
-body, main, header, footer {
-    z-index: 10;
-}

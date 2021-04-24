@@ -3,26 +3,18 @@ let primaryNavigation = document.querySelector('body > header nav ul');
 let overlay = document.querySelector('.overlay');
 let outside = document.querySelector('.outside');
 
-
-// // Open navigation with hamburger menu
-// hamburgerMenu.addEventListener('click', () => {
-//     console.log("test");
-//     primaryNavigation.classList.toggle('open');
-//     overlay.classList.toggle('show-overlay');
-//     menuOpen = !menuOpen;
-//     console.log(menuOpen)
-// });
+// Function to toggle all classes at once   
+toggleClasses = () => {
+    primaryNavigation.classList.toggle('open');
+    overlay.classList.toggle('show-overlay');
+    outside.classList.toggle('show-outside');
+}
 
 // Close hamburger menu when clicking outside of the menu
 window.addEventListener('click', (event) => {   
     if (event.target === hamburgerMenu) {
-        console.log("test");
-        primaryNavigation.classList.toggle('open');
-        overlay.classList.toggle('show-overlay');
-        outside.classList.toggle('show-outside');
+        toggleClasses();
     }  else if (event.target === outside) {
-        primaryNavigation.classList.toggle('open');
-        overlay.classList.toggle('show-overlay');    
-        outside.classList.toggle('show-outside');
+        toggleClasses();
     }
-})
+});

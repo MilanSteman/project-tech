@@ -9,6 +9,7 @@
         display: flex;
         align-items: center;
         
+        // Navigation
         nav {
             display: flex;
             align-items: center;
@@ -56,18 +57,20 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                padding: 4em $padding $padding $padding;
                 z-index: 100;
 
                 li {
                     width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    padding: 4.5em $padding $padding $padding;
+
+                    a {
+                        display: block;
+                        padding: $padding-smaller 0;
+                    }
                 }
             }
 
+            // Overlay for darker background when active hamburger menu
             .overlay {
                 width: 100%;
                 height: 100%;
@@ -80,6 +83,7 @@
                 z-index: 1;
             }
 
+            // Outside area to trigger click events but still have a smooth animation.
             .outside {
                 width: 100%;
                 height: 100%;
@@ -89,7 +93,8 @@
                 z-index: 5;
                 display: none;
             }
-
+            
+            // Classes for toggling menu
             .show-overlay {
                 opacity: 1;
             }

@@ -2,7 +2,7 @@
 @import '../1-settings/_global.scss';
 
 // Background colors
-body, body > header nav ul li {
+body, body > header nav ul {
     background-color: $dark-gray;
 }
 
