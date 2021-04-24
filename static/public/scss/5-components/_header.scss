@@ -16,33 +16,90 @@
         
             // Hamburger menu
             .hamburger-menu {
-                width: 2em;
-                height: 2em;
+
+                padding: calc(2.25em / 2);
                 position: relative;
-                margin-left: auto; //position itself to the right
+                left: -0.25em;
+                z-index: 1000;
     
                 span {
                     top: 50%;
                     transform: translateY(-50%);
+                    left: 0.25em;
                 }
     
                 // Before element for bottom hamburger stripe
                 span::before {
-                    bottom: -10px;
+                    bottom: -.5em;
                 }
     
                 // After element for top hamburger stripe
                 span::after {
-                    top: -10px;
+                    top: -0.5em;
                 }
     
                 span, span::before, span::after {
                     content: '';
-                    width: 100%;
-                    height: 0.25em;
+                    width: 1.75em;
+                    height: 0.2em;
                     position: absolute;
                     background-color: $lightest-gray;
                 }
+            }
+
+            // Primary Navigation
+            ul {
+                width: 85%;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: 0.7s;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 100;
+
+                li {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 4.5em $padding $padding $padding;
+                }
+            }
+
+            .overlay {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: linear-gradient(to right, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+                opacity: 0;
+                transition: 0.7s;
+                z-index: 1;
+            }
+
+            .outside {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 5;
+                display: none;
+            }
+
+            .show-overlay {
+                opacity: 1;
+            }
+
+            .show-outside {
+                display: block;
+            }
+
+            .open {
+                transform: translateY(0);
             }
         }
     }

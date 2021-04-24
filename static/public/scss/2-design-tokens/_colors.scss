@@ -2,15 +2,15 @@
 @import '../1-settings/_global.scss';
 
 // Background colors
-body {
-    background-color: $darkest-gray;
-}
-
-body > header, body > footer {
+body, body > header nav ul li {
     background-color: $dark-gray;
 }
 
+body > header, body > footer {
+    background-color: $darkest-gray;
+}
+
 // Typography colors
-h1, h2, h3, h4, h5, h6, p {
-    color: $light-gray;
+h1, h2, h3, h4, h5, h6, p, a {
+    color: $lightest-gray;
 }

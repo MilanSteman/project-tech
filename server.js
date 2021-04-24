@@ -36,7 +36,14 @@ app.get('/movies/:movieId/:slug', (req, res) => {
 
 //middleware
 app.use((req, res, next) => {
-  res.status(404).send("<h1>Sorry, we can't find that page!</h1>")
+  let data = {
+    message: 'Error 404',
+    title: 'Error 404',
+    authorised: true,
+    description: 'We could not find that page!'
+  }
+
+  res.status(404).render('home.njk', data)
 })
 
 app.listen(port, () => {

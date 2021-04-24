@@ -2,10 +2,18 @@
 @import '../1-settings/imports';
 
 // General settings
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, a {
     font-family: 'Roboto', 'segoe ui', tahoma, sans-serif;
 }
 
 p {
     letter-spacing: 0.0125em;
+}
+
+// Hamburger menu typography (mobile)
+@media (max-width: 600px) {
+    body > header nav ul li a {
+        font-weight: 500;
+        font-size: 1.1em;
+    }
 }

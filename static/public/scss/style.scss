@@ -29,3 +29,7 @@
     max-width: 100%;
     text-decoration: none;
 }
+
+body, main, header, footer {
+    z-index: 10;
+}
