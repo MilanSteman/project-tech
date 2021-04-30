@@ -1,11 +1,55 @@
 {% extends  "layouts/layout.njk" %}
 {% block  content %}
-  <h1>{{message}}</h1>
+  <header class='home-header'>
+    <p>{{data.message}}</p>
+    <a href='/profile'>
+      <img src={{data.picture}}>
+    </a>
+  </header>
+  
+  <!-- Online contacts -->
+  {% if onlineUsers.length > 0 %}
+    <section class='online-contacts'>
+      <ul class='user-list small-cards'>
+        {% for onlineUser in onlineUsers %}
+          <li>
+          {% if onlineUser.online == true %}
+              <a href='/' class='online'>
+                <img src={{onlineUser.picture}}>
+              </a>
+                {% else %}
+              <a href='/' class='away'>
+                <img src={{onlineUser.picture}}>
+              </a>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
 
-  {% if authorised %}
-    <p>{{description}}</p>
+  <!-- Recommended users -->
+  {% if users.length > 0 %}
+    <section class='show-users'>
+      <h1>Aanbevolen voor jou</h1>
+      <ul class='user-list'>
+        {% for user in users %}
+        <!-- User Card -->
+        <li>
+          <a href='/'>
+            <img src={{user.picture}}>
+            <h3>{{user.username}}</h3>
+            <p>{{user.description}}</p>
 
-    {% else %}
-      <p>{% include "partials/error.njk" %}</p>
+            <!-- List of games -->
+              <ul>
+                {% for game in user.games %}
+                <li>{{game}}</li>
+                {% endfor %}
+              </ul>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
   {% endif %}
 {% endblock %}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="author" content="Milan">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>{{data.title}}</title>
     <link href="css/style.css" rel="stylesheet">
     <link href="images/logo-favicon.png" rel="shortcut icon">
     <!-- Material icons -->
@@ -13,15 +13,15 @@
 </head>
 
 <body>
-    <!-- Header -->
-    {% include "../partials/header.njk" %}
-
     <!-- Content -->
     <main>
         {% block  content %}
     
         {% endblock %}
     </main>
+
+    <!-- Navigation -->
+    {% include "../partials/nav.njk" %}
 </body>
 <script src='js/menu.js'></script>
 </html>

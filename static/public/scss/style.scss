@@ -1,5 +1,4 @@
 // Imports
-// 1: Settings
 @charset "UTF-8";
 
 @import 
@@ -19,4 +18,9 @@
     '4-skeleton/_grid.scss';
 
 @import
-    '5-components/_header.scss';
+    '5-components/_navigation.scss',
+    '5-components/_header-home.scss',
+    '5-components/_user-list.scss',
+    '5-components/_small-cards.scss',
+    '5-components/_profile.scss',
+    '5-components/_user-posts.scss';

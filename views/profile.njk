@@ -1,0 +1,29 @@
+{% extends  "layouts/layout.njk" %}
+{% block  content %}
+    <header class='profile-header'>
+        <img src={{data.banner}}>
+        <div>
+            <img src={{data.picture}}>
+            <a href='/'>Profiel bewerken</a>
+        </div>
+        <h1>{{data.displayname}}<span>@{{data.username}}</span></h1>
+        <p class='description'>{{data.description}}</p>
+    </header>
+    
+    <!-- User posts -->
+    {% if data.posts.length > 0 %}
+    <section>
+      <h1>Gallerij</h1>
+      <ul class='user-posts'>
+        {% for post in data.posts %}
+        <!-- User Card -->
+        <li>
+          <a href='/'>
+            <img src={{post}}>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+{% endblock %}

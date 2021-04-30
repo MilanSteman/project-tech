@@ -1,0 +1,27 @@
+// Imports
+@import '../1-settings/_global.scss';
+
+// Mobile header
+@media (max-width: 600px) {
+    .home-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: $margin;
+
+        p {
+            color: $grey;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        a {
+            margin-left: auto;
+
+            img {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+            }
+        }
+    }
+}

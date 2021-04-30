@@ -1,38 +1,39 @@
 // Variables
 // Colors
-$gray: #7C8183;
-
-$dark-gray: #313337;
-$darkest-gray: #212121;
-
-$light-gray: #7C8183;
-$lightest-gray: #E8EAED;
+$white: #FEFFFF;
+$black: #050F19;
+$grey: #949FA8;
+$lightgrey: #f5f5f5;
+$blue: #1552EF;
+$green: #15ef86;
+$orange: #efce15;
+$red: #ef2b15;
 
 // Margins
-$margin: 1em;
+$margin: 1rem;
 
-$margin-big: 1.5em;
-$margin-bigger: 2em;
-$margin-biggest: 3em;
+$margin-big: 1.5rem;
+$margin-bigger: 2rem;
+$margin-biggest: 3rem;
 
-$margin-small: 0.75em;
-$margin-smaller: 0.5em;
-$margin-smallest: 0.25em;
+$margin-small: 0.75rem;
+$margin-smaller: 0.5rem;
+$margin-smallest: 0.25rem;
 
 // Paddings
-$padding: 1em;
+$padding: 1rem;
 
-$padding-big: 1.5em;
-$padding-bigger: 2em;
-$padding-biggest: 3em;
+$padding-big: 1.5rem;
+$padding-bigger: 2rem;
+$padding-biggest: 3rem;
 
-$padding-small: 0.75em;
-$padding-smaller: 0.5em;
-$padding-smallest: 0.25em;
+$padding-small: 0.75rem;
+$padding-smaller: 0.5rem;
+$padding-smallest: 0.25rem;
 
-// Z-index
-body, main, header, footer {
-    z-index: 10;
+// Default padding for offset mobile navigation
+body {
+    padding-bottom: 4rem;
 }
 
 // Default CSS
@@ -40,8 +41,11 @@ body, main, header, footer {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    max-width: 100%;
+    overflow-x: hidden;
     text-decoration: none;
     list-style: none;
 }
-  
+
+img {
+    object-fit: cover;
+}

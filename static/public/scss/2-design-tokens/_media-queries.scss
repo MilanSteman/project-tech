@@ -4,11 +4,11 @@
 // Phone Size
 @media (max-width: 600px) {
     // Standard padding left and right
-    body > header, body > main, body > footer {
+    body > header, body > main section, body > main header, body > main footer, body > footer {
         padding: 0 $padding;
     }
 
-    body > main {
+    .home-header {
         margin: $margin 0;
     }
 }
