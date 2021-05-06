@@ -1,6 +1,6 @@
 {
-  "name": "project-tech",
-  "version": "1.0.0",
+  "name": "konnekt",
+  "version": "1.0.3",
   "description": "project-tech",
   "main": "server.js",
   "scripts": {
