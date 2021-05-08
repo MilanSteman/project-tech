@@ -1,0 +1,47 @@
+{% extends "layouts/layout.njk" %}
+{% block content %}
+    <header class='profile-header'>
+        <a href='/profile'>
+            <span class="material-icons">arrow_back</span></a>
+        <h1>Profiel wijzigen</h1>
+    </header>
+
+    <section class='profile-settings'>
+        <form action='/profile-settings' method='post' enctype='multipart/form-data'>
+            <div class='settings-banner'>
+                <img src={{profile.banner}} class='output-banner'></img>
+                <span class="material-icons-outlined">add</span>
+                <label for='banner'></label>
+                <input id='banner' type='file' name='banner'>
+            </div>
+            <div class='settings-avatar'>
+                <img src={{profile.picture}} class='output-avatar'></img>
+                <span class="material-icons-outlined">add</span>
+                <label for='avatar'></label>
+                <input id='avatar' type='file' name='avatar'>
+            </div>
+            <div class='settings-text settings-name'>
+                <label for='displayname'>Naam</label>
+                <input id='displayname' type='text' name='displayname' required maxlength='15' value={{profile.displayname}}>
+            </div>
+            <div class='settings-text settings-description'>
+                <label for='description'>Beschrijving</label>
+                <textarea id='description' type='text' name='description' required maxlength='60'>{{profile.description}}</textarea>
+            </div>
+            <div class='settings-text'>
+                {% for category in categories %}
+                    <div>
+                        <label for={{category}}>{{category}}</label>
+                        <input id='{{category}}' type='checkbox' name='categories' value={{category}}>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type='submit'>Opslaan</button>
+        </form>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src='js/show-input.js'></script>
+{% endblock %}

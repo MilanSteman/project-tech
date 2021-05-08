@@ -1,27 +1,26 @@
 <!doctype html>
 <html lang="nl">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Milan">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{data.title}}</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="images/logo-favicon.png" rel="shortcut icon">
-    <!-- Material icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Milan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{data.title}}</title>
+        <link href="css/style.css" rel="stylesheet">
+        <link href="images/logo-favicon.png" rel="shortcut icon">
+        <!-- Material icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    </head>
 
-<body>
-    <!-- Content -->
-    <main>
-        {% block  content %}
-    
-        {% endblock %}
-    </main>
+    <body>
+        <!-- Content -->
+        <main>
+            {% block content %}{% endblock %}
+        </main>
 
-    <!-- Navigation -->
-    {% include "../partials/nav.njk" %}
-</body>
-<script src='js/menu.js'></script>
+        <!-- Navigation -->
+        {% include "../partials/nav.njk" %}
+    </body>
+    {% block scripts %}{% endblock %}
 </html>

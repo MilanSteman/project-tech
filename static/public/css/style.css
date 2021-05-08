@@ -78,7 +78,7 @@ img {
   }
 }
 
-h1, h2, h3, h4, h5, h6, p, a, span, button {
+h1, h2, h3, h4, h5, h6, p, a, span, button, label, textarea {
   font-family: 'Roboto', 'segoe ui', tahoma, sans-serif;
 }
 
@@ -189,6 +189,7 @@ img {
         -ms-flex-align: center;
             align-items: center;
     margin-bottom: 1rem;
+    height: 2.25rem;
   }
   .home-header p {
     color: #949FA8;
@@ -371,14 +372,37 @@ img {
 
 @media (max-width: 600px) {
   .profile-header {
-    padding: 0;
+    width: 100%;
+    height: 3.5rem;
     border-bottom: 0.5px solid #f5f5f5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
-  .profile-header > img {
+  .profile-header a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .profile-header h1 {
+    font-size: 1.25rem;
+    margin-left: 1rem;
+    font-weight: 900;
+  }
+  .profile-body {
+    padding: 0;
+  }
+  .profile-body > img {
     width: 100%;
     height: 9rem;
   }
-  .profile-header div {
+  .profile-body div {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -390,13 +414,13 @@ img {
         -ms-flex-align: end;
             align-items: flex-end;
   }
-  .profile-header div img {
+  .profile-body div img {
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
     border: 0.25rem solid #FEFFFF;
   }
-  .profile-header div a {
+  .profile-body div a {
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
@@ -410,7 +434,7 @@ img {
     border-radius: 2rem;
     border: 1px solid #1552EF;
   }
-  .profile-header h1 {
+  .profile-body h2 {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -422,14 +446,154 @@ img {
     margin-left: 1rem;
     font-size: 1.5rem;
   }
-  .profile-header h1 span {
+  .profile-body h2 span {
     margin-top: 0.25rem;
     color: #949FA8;
     font-size: 1rem;
     font-weight: 400;
   }
-  .profile-header .description {
+  .profile-body .description {
     margin: 1rem;
+  }
+  .profile-settings {
+    padding: 0;
+  }
+  .profile-settings form .settings-avatar {
+    margin: 0 1rem;
+    overflow: visible;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    overflow: hidden;
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+  .profile-settings form .settings-avatar img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border: 0.25rem solid #FEFFFF;
+    position: relative;
+    margin-top: 0.25rem;
+  }
+  .profile-settings form .settings-avatar span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 10;
+    border-radius: 50%;
+    padding: .5rem;
+    margin-top: 0.25rem;
+  }
+  .profile-settings form .settings-avatar span:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+  }
+  .profile-settings form .settings-avatar label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: #050F19;
+    border: 0.25rem solid #FEFFFF;
+    opacity: 0.3;
+    margin-top: 0.25rem;
+  }
+  .profile-settings form .settings-avatar input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+  }
+  .profile-settings form .settings-banner {
+    width: 100%;
+    height: 9em;
+    position: relative;
+    overflow: hidden;
+  }
+  .profile-settings form .settings-banner img {
+    width: 100%;
+    height: 100%;
+  }
+  .profile-settings form .settings-banner span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 10;
+    border-radius: 50%;
+    padding: .5rem;
+  }
+  .profile-settings form .settings-banner span:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+  }
+  .profile-settings form .settings-banner label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #050F19;
+    opacity: 0.3;
+  }
+  .profile-settings form .settings-banner input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+  }
+  .profile-settings .settings-text {
+    margin: 1.5rem 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    border: 1px solid #c4cfd6;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+  }
+  .profile-settings .settings-text label {
+    font-size: 0.825rem;
+    color: #949FA8;
+  }
+  .profile-settings .settings-text input, .profile-settings .settings-text textarea {
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    padding: 0.25rem 0;
+  }
+  .profile-settings .settings-name {
+    margin-top: -1.25rem;
+  }
+  .profile-settings button[type='submit'] {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: #1552EF;
+    color: #FEFFFF;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    border: none;
+    position: absolute;
+    top: 0.625rem;
+    right: 1rem;
   }
 }
 
