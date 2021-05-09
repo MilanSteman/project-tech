@@ -3,20 +3,20 @@
 Konnekt is a matching app made to connect you with other players around the world.
 
 ## Installation
-Make sure that git and npm are installed on your machine:
+Make sure that git is installed on your machine:
 ```
 $ sudo apt-get update
 $ sudo apt-get install git
+```
+
+Clone the repository and install the packages:
+```
+$ git clone https://github.com/MilanSteman/project-tech.git
 $ npm install
 ```
 
-Clone the repository:
-```
-$ git clone https://github.com/MilanSteman/project-tech.git
-```
-
 ## Getting started
-Start the applicatie with:
+Start the application with:
 ```
 $ npm start
 

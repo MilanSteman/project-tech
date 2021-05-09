@@ -120,7 +120,7 @@ app.use(express.static('static/public'));
 
 // middleware
 app.use((req, res, next) => {
-  res.status(404).render('home.njk', { profile, users, onlineUsers });
+  res.status(404).send('404');
 });
 
 app.listen(port, () => {
