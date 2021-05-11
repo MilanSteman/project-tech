@@ -4,7 +4,23 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const multer = require('multer');
+const { MongoClient } = require('mongodb');
+
 require('dotenv').config();
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yxc1m.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}); 
+
+client.connect((err) => {
+  if (err) throw err;
+  console.log('connected');
+  const database = client.db(process.env.DB_NAME);
+  console.log(database);
+});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -17,7 +33,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 const app = express();
-const port = 3000;
+const port = process.env.DB_PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded());
