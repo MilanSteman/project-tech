@@ -3,17 +3,17 @@
   <header class='profile-header'>
     <a href='/profile'>
       <span class="material-icons">arrow_back</span></a>
-    <h1>{{profile.displayname}}</h1>
+    <h1>{{result.name}}</h1>
   </header>
 
   <section class='profile-body'>
-    <img src={{profile.banner}}>
+    <img src={{result.banner.path}}>
     <div>
-      <img src={{profile.picture}}>
+      <img src={{result.avatar.path}}>
       <a href='/profile-settings'>Profiel bewerken</a>
     </div>
-    <h2>{{profile.displayname}}
-      <span>@{{profile.username}}</span></h2>
-    <p class='description'>{{profile.description}}</p>
+    <h2>{{result.name}}
+      <span>@{{result._id}}</span></h2>
+    <p class='description'>{{result.description}}</p>
   </header>
 {% endblock %}
