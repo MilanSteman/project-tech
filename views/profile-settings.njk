@@ -7,20 +7,19 @@
     </header>
 
     <section class='profile-settings'>
-        {# <form action='/profile-settings' method='post' <!enctype='multipart/form-data'> #}
-        <form action='/profile-settings' method='post' <!enctype='multipart/form-data'>
-            {# <div class='settings-banner'>
+        <form action='/profile-settings' method='post' enctype='multipart/form-data'>
+            <div class='settings-banner'>
                 <img src={{profile.banner}} class='output-banner'></img>
                 <span class="material-icons-outlined">add</span>
                 <label for='banner'></label>
-                <input id='banner' type='file' name='banner' accept='image/*'>
+                <input id='banner' type='file' name='banner' accept='image/*' required>
             </div>
             <div class='settings-avatar'>
                 <img src={{profile.picture}} class='output-avatar'></img>
                 <span class="material-icons-outlined">add</span>
                 <label for='avatar'></label>
-                <input id='avatar' type='file' name='avatar' accept='image/*'>
-            </div> #}
+                <input id='avatar' type='file' name='avatar' accept='image/*' required>
+            </div>
             <div class='settings-text settings-name'>
                 <label for='name'>Naam</label>
                 <input id='name' type='text' name='name' required maxlength='15' value={{profile.displayname}}>
