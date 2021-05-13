@@ -7,26 +7,6 @@
     </a>
   </header>
 
-  <!-- Online contacts -->
-  {% if onlineUsers.length > 0 %}
-    <section class='online-contacts'>
-      <ul class='user-list small-cards'>
-        {% for onlineUser in onlineUsers %}
-          <li>
-            {% if onlineUser.online == true %}
-              <a href='/' class='online'>
-                <img src={{onlineUser.picture}}>
-              </a>
-            {% else %}
-              <a href='/' class='away'>
-                <img src={{onlineUser.picture}}>
-              </a>
-            {% endif %}
-          {% endfor %}
-      </ul>
-    </section>
-  {% endif %}
-
   <!-- Recommended users -->
   {% if users.length > 0 %}
     <section class='show-users'>

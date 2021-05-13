@@ -1,144 +1,23 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable object-shorthand */
-
 const express = require('express');
 const nunjucks = require('nunjucks');
-const multer = require('multer');
-const { MongoClient } = require('mongodb');
+const router = require('./routes/router.js');
 
-require('dotenv').config();
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yxc1m.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}); 
-
-client.connect((err) => {
-  if (err) throw err;
-  console.log('connected');
-  const database = client.db(process.env.DB_NAME);
-  console.log(database);
-});
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'static/public/uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${file.fieldname}-${Date.now()}.png`);
-  },
-});
-
-const upload = multer({ storage: storage });
 const app = express();
 const port = process.env.DB_PORT || 3000;
+
+// static files
+app.use(express.static('static/public'));
 
 app.use(express.json());
 app.use(express.urlencoded());
 
-const categories = ['Games', 'Sports', 'Movies'];
-
-const profile = {
-  message: 'Welkom terug, milan.',
-  displayname: 'milan',
-  username: 'milannn',
-  title: 'Home',
-  picture: 'images/profile-picture.jpg',
-  banner: 'images/michael.jpg',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-
-  posts: ['images/michael.jpg', 'images/michael.jpg', 'images/michael.jpg'],
-};
-
-// temporary array for users
-const users = [
-  {
-    username: 'Simeon Yetarian',
-    picture: 'images/simeon.png',
-    description:
-      'Go and get it. Just try to bring the car back in good condition huh?',
-    games: ['GTA V', 'GTA IV'],
-  },
-  {
-    username: 'Franklin Clinton',
-    picture: 'images/franklin.jpg',
-    description:
-      'A what? A credit fraud? Be serious dude.... I just work the repo man.',
-    games: ['GTA V', 'GTA San Andreas'],
-  },
-  {
-    username: 'Michael Townley',
-    picture: 'images/michael.jpg',
-    description:
-      'You forget a thousand things everyday, pal. Make sure this is one of them.',
-    games: ['GTA V', 'GTA San Andreas'],
-  },
-];
-
-// temporary array for users
-const onlineUsers = [
-  {
-    username: 'Franklin Clinton',
-    picture: 'images/franklin.jpg',
-    online: true,
-  },
-  {
-    username: 'Michael Townley',
-    picture: 'images/michael.jpg',
-    online: false,
-  },
-  {
-    username: 'Simeon Yetarian',
-    picture: 'images/simeon.png',
-    online: true,
-  },
-];
+app.use('/', router);
 
 nunjucks.configure('views', {
-  autoescape: true,
-  express: app,
-});
-
-app.get('/', (req, res) => {
-  res.render('home.njk', { profile, users, onlineUsers });
-});
-
-app.get('/profile', (req, res) => {
-  res.render('profile.njk', { profile, users, onlineUsers });
-});
-
-app.get('/profile-settings', (req, res) => {
-  res.render('profile-settings.njk', { profile, categories });
-});
-
-app.post(
-  '/profile-settings',
-  upload.fields([
-    { name: 'banner', maxCount: 1 },
-    { name: 'avatar', maxCount: 1 },
-  ]),
-  (req, res) => {
-    const user = {
-      username: req.body.displayname,
-      picture: `uploads/${req.files.avatar[0].filename}`,
-      description: req.body.description,
-      games: req.body.categories,
-    };
-    users.push(user);
-    res.render('home.njk', { profile, categories, users, onlineUsers });
-  }
-);
-
-// middelware
-app.use(express.static('static/public'));
-
-// middleware
-app.use((req, res, next) => {
-  res.status(404).send('404');
+        autoescape: true,
+        express: app,
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+        console.log(`Example app listening at http://localhost:${port}`);
 });
