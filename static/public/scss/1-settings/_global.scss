@@ -1,41 +1,5 @@
-// Variables
-// Colors
-$white: #FEFFFF;
-$black: #050F19;
-$grey: #949FA8;
-$alt-grey: #c4cfd6;
-$lightgrey: #f5f5f5;
-$blue: #1552EF;
-$green: #15ef86;
-$orange: #efce15;
-$red: #ef2b15;
-
-// Margins
-$margin: 1rem;
-
-$margin-big: 1.5rem;
-$margin-bigger: 2rem;
-$margin-biggest: 3rem;
-
-$margin-small: 0.75rem;
-$margin-smaller: 0.5rem;
-$margin-smallest: 0.25rem;
-
-// Paddings
-$padding: 1rem;
-
-$padding-big: 1.5rem;
-$padding-bigger: 2rem;
-$padding-biggest: 3rem;
-
-$padding-small: 0.75rem;
-$padding-smaller: 0.5rem;
-$padding-smallest: 0.25rem;
-
-// Default padding for offset mobile navigation
-body {
-    padding-bottom: 4rem;
-}
+// Imports
+@import "../1-settings/_variables.scss";
 
 // Default CSS
 *, *::after, *::before {
@@ -50,3 +14,37 @@ body {
 img {
     object-fit: cover;
 }
+
+// Default padding for offset mobile navigation
+body {
+    padding-bottom: 4rem;
+}
+
+// Phone Size
+// Standard padding left and right
+body > header,
+body > main section,
+body > main header,
+body > main footer,
+body > footer {
+  padding: 0 $padding;
+}
+
+main {
+    position: relative;
+}
+
+textarea {
+    min-height: 5rem;
+}
+
+main header div.parent-top-navigation {
+    display: none;
+}
+
+header.profile-header {    
+    &>div:first-of-type {
+      display: flex;
+      align-items: center;
+    }
+  }

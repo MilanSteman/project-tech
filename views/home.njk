@@ -1,10 +1,15 @@
 {% extends "layouts/layout.njk" %}
 {% block content %}
   <header class='home-header'>
-    <p>Welkom terug, {{profile.name}}</p>
-    <a href='/profile'>
-      <img src={{profile.avatar}}>
-    </a>
+    <div>
+      <div>
+        <p>Welkom terug, {{profile.name}}</p>
+        <a href='/profile'>
+          <img src={{profile.avatar}}>
+        </a>
+      </div>
+      {% include "partials/header.njk" %}
+    </div>
   </header>
 
   <!-- Recommended users -->
@@ -20,7 +25,7 @@
               <h3>{{recommendedUser.name}}</h3>
               <p>{{recommendedUser.description}}</p>
 
-              <!-- List of games -->
+              <!-- Category -->
               <ul>
                 <li>{{recommendedUser.category}}</li>
               </ul>

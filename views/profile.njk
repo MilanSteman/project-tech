@@ -3,9 +3,12 @@
   {% if differentProfile === true %}
     <!-- Different profile -->
     <header class='profile-header'>
-      <a href='/'>
-        <span class="material-icons">arrow_back</span></a>
-      <h1>{{result.name}}</h1>
+      <div>
+        <a href='/'>
+          <span class="material-icons">arrow_back</span></a>
+        <h1>{{result.name}}</h1>
+      </div>
+      {% include "partials/header.njk" %}
     </header>
 
     <section class='profile-body'>
@@ -17,13 +20,17 @@
       <h2>{{result.name}}
         <span>@{{result._id}}</span></h2>
       <p class='description'>{{result.description}}</p>
+      <p class='description'>Category: {{result.category}}</p>
     </header>
   {% else %}
     <!-- Own profile -->
     <header class='profile-header'>
-      <a href='/'>
-        <span class="material-icons">arrow_back</span></a>
-      <h1>{{profile.name}}</h1>
+      <div>
+        <a href='/'>
+          <span class="material-icons">arrow_back</span></a>
+        <h1>{{profile.name}}</h1>
+      </div>
+      {% include "partials/header.njk" %}
     </header>
 
     <section class='profile-body'>
@@ -35,6 +42,7 @@
       <h2>{{profile.name}}
         <span>@{{profile._id}}</span></h2>
       <p class='description'>{{profile.description}}</p>
+      <p class='description'>Category: {{profile.category}}</p>
     </header>
   {% endif %}
 {% endblock %}

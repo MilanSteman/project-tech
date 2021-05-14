@@ -13,7 +13,8 @@ const categories = ["Games", "Sports", "Movies"];
 let profile = {
   _id: "01",
   name: "milan",
-  description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+  description:
+    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
   category: "Games",
   avatar: "images/profile-picture.jpg",
   banner: "images/michael.jpg",
@@ -97,22 +98,22 @@ router.get("/profile-settings", (req, res, user) => {
 /**
  * This will update the current user profile. It will make a new user and assign that to the profile variable.
  */
- router.post(
+router.post(
   "/profile-settings",
   upload.fields([
     { name: "banner", maxCount: 1 },
     { name: "avatar", maxCount: 1 },
   ]),
   (req, res, user) => {
-    // Create user 
+    // Create user
     user = {
-      _id: "0",
+      _id: "01",
       name: req.body.name,
       avatar: `uploads/${req.files.avatar[0].filename}`,
       banner: `uploads/${req.files.banner[0].filename}`,
       description: req.body.description,
       category: req.body.category,
-    }
+    };
 
     // Asign user to the profile variable
     profile = user;

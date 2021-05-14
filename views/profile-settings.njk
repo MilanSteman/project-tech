@@ -3,9 +3,12 @@
     {% if differentProfile === true %}
         <!-- Different profile -->
         <header class='profile-header'>
-            <a href='/profiles/{{result._id}}'>
-                <span class="material-icons">arrow_back</span></a>
-            <h1>Profiel wijzigen</h1>
+            <div>
+                <a href='/profiles/{{result._id}}'>
+                    <span class="material-icons">arrow_back</span></a>
+                <h1>Profiel wijzigen</h1>
+            </div>
+            {% include "partials/header.njk" %}
         </header>
 
         <section class='profile-settings'>
@@ -45,9 +48,12 @@
     {% else %}
         <!-- Own profile -->
         <header class='profile-header'>
-            <a href='/profile'>
-                <span class="material-icons">arrow_back</span></a>
-            <h1>Profiel wijzigen</h1>
+            <div>
+                <a href='/profile'>
+                    <span class="material-icons">arrow_back</span></a>
+                <h1>Profiel wijzigen</h1>
+            </div>
+            {% include "partials/header.njk" %}
         </header>
 
         <section class='profile-settings'>

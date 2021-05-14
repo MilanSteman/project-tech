@@ -3,11 +3,11 @@
 
 @import 
     '1-settings/_global.scss',
+    '1-settings/_variables.scss',
     '1-settings/_imports.scss';
 
 @import
     '2-design-tokens/_colors.scss',
-    '2-design-tokens/_fonts.scss',
     '2-design-tokens/_media-queries.scss',
     '2-design-tokens/_typography.scss';
 
@@ -21,5 +21,4 @@
     '5-components/_navigation.scss',
     '5-components/_header-home.scss',
     '5-components/_user-list.scss',
-    '5-components/_small-cards.scss',
     '5-components/_profile.scss';
