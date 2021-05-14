@@ -84,7 +84,6 @@ router.get("/profile-settings", (req, res) => {
 });
 
 // TODO:: maak een active user die de net aangemaakte user wordt, wanneer er geen active user is profiel aanmaken.
-
 /**
  * This creates a new user from data provided by the user on the profile settings page.
  * It will insert data into the collection 'users' and redirect the user to the created page with a slug of the user ID.
@@ -100,7 +99,7 @@ router.post(
     user = {
       name: req.body.name,
       description: req.body.description,
-      games: req.body.categories,
+      categories: req.body.categories,
       avatar: req.files.avatar[0],
       banner: req.files.banner[0],
     };
@@ -127,11 +126,12 @@ router.get("/profiles/:userId", (req, res, userId) => {
       _id: ObjectId(userId),
     },
     (err, result) => {
+      // Check for errors
       if (err) throw err;
 
       // Fix the destination to uploaded images
-      result.banner.path = `../uploads/${result.banner.filename}`;
-      result.avatar.path = `../uploads/${result.avatar.filename}`;
+      result.banner.path = `../../uploads/${result.banner.filename}`;
+      result.avatar.path = `../../uploads/${result.avatar.filename}`;
 
       // Render the profile of the given user
       res.render("profile.njk", { result });
@@ -146,8 +146,24 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
   // Store the userId
   userId = req.params.userId;
 
-  // Render the profile settings of the given user
-  res.render("profile-settings.njk"); // TODO: profile zo opzetten dat het andere data laad.
+  // Find the user matching the userId
+  db.collection("users").findOne(
+    {
+      _id: ObjectId(userId),
+    },
+    (err, result) => {
+      // Check for errors
+      if (err) throw err;
+      console.log(result)
+
+      // Fix the destination to uploaded images
+      result.banner.path = `../../uploads/${result.banner.filename}`;
+      result.avatar.path = `../../uploads/${result.avatar.filename}`;
+
+      // Render the profile of the given user
+      res.render("profile-settings.njk", { result, categories });
+    }
+  );
 });
 
 /**
@@ -166,12 +182,15 @@ router.post(
 
     // Update the current user
     db.collection("users").updateOne(
+      // Search for the current userId
       { _id: ObjectID(userId) },
+
+      // Replace current data with user input
       {
         $set: {
           name: req.body.name,
           description: req.body.description,
-          games: req.body.categories,
+          categories: req.body.categories,
           avatar: req.files.avatar[0],
           banner: req.files.banner[0],
         },
@@ -179,7 +198,7 @@ router.post(
     );
 
     // Automatically redirect to the updated user
-    res.redirect(`/profiles/${user._id}`);
+    res.redirect(`/profiles/${userId}`);
   }
 );
 
@@ -188,4 +207,5 @@ router.use((req, res, next) => {
   res.status(404).send("404");
 });
 
+// Export the router for use in the server
 module.exports = router;
