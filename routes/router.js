@@ -11,9 +11,9 @@ const categories = ["Games", "Sports", "Movies"];
 
 // Variable for our current profile (no login yet)
 let profile = {
-  _id: "0",
+  _id: "01",
   name: "milan",
-  description: "Test!",
+  description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
   category: "Games",
   avatar: "images/profile-picture.jpg",
   banner: "images/michael.jpg",
@@ -76,22 +76,26 @@ router.get("/", (req, res, recommendedUsers) => {
     });
 });
 
+/**
+ * Renders the current user profile page.
+ */
 router.get("/profile", (req, res) => {
   // Set different profile to false
   differentProfile = false;
   res.render("profile.njk", { profile, differentProfile });
 });
 
+/**
+ * Renders the settings page for the current user profile.
+ */
 router.get("/profile-settings", (req, res, user) => {
   // Set different profile to false
   differentProfile = false;
   res.render("profile-settings.njk", { profile, categories });
 });
 
-// TODO:: maak een active user die de net aangemaakte user wordt, wanneer er geen active user is profiel aanmaken.
 /**
- * This creates a new user from data provided by the user on the profile settings page.
- * It will insert data into the collection 'users' and redirect the user to the created page with a slug of the user ID.
+ * This will update the current user profile. It will make a new user and assign that to the profile variable.
  */
  router.post(
   "/profile-settings",
@@ -110,41 +114,48 @@ router.get("/profile-settings", (req, res, user) => {
       category: req.body.category,
     }
 
+    // Asign user to the profile variable
     profile = user;
 
+    // Redirect back to user page
     res.redirect("/profile");
   }
 );
 
+/**
+ * Renders the page for adding a new user.
+ */
 router.get("/add-user", (req, res) => {
-  // Set different profile to false
   res.render("add-user.njk", { categories });
 });
 
+/**
+ * This creates a new user from data provided by the user on the profile add page.
+ * It will insert data into the collection 'users' and redirect the user to the created page with a slug of the user ID.
+ */
+router.post(
+  "/add-user",
+  upload.fields([
+    { name: "banner", maxCount: 1 },
+    { name: "avatar", maxCount: 1 },
+  ]),
+  (req, res, user) => {
+    // Create an user to insert the necessary data into the database
+    user = {
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      avatar: req.files.avatar[0],
+      banner: req.files.banner[0],
+    };
 
-// router.post(
-//   "/profile-settings",
-//   upload.fields([
-//     { name: "banner", maxCount: 1 },
-//     { name: "avatar", maxCount: 1 },
-//   ]),
-//   (req, res, user) => {
-//     // Create an user to insert the necessary data into the database
-//     user = {
-//       name: req.body.name,
-//       description: req.body.description,
-//       category: req.body.category,
-//       avatar: req.files.avatar[0],
-//       banner: req.files.banner[0],
-//     };
+    // Insert the variable above into the collection 'users' within the database.
+    db.collection("users").insertOne(user);
 
-//     // Insert the variable above into the collection 'users' within the database.
-//     db.collection("users").insertOne(user);
-
-//     // Automatically redirect to the created user
-//     res.redirect(`/profiles/${user._id}`);
-//   }
-// );
+    // Automatically redirect to the created user
+    res.redirect(`/profiles/${user._id}`);
+  }
+);
 
 /**
  * This will render a profile from an existing user with its data attached to it. It is done by looking for the
