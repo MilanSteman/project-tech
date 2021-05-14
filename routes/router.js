@@ -116,6 +116,12 @@ router.get("/profile-settings", (req, res, user) => {
   }
 );
 
+router.get("/add-user", (req, res) => {
+  // Set different profile to false
+  res.render("add-user.njk", { categories });
+});
+
+
 // router.post(
 //   "/profile-settings",
 //   upload.fields([
