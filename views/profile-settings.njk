@@ -1,45 +1,91 @@
 {% extends "layouts/layout.njk" %}
 {% block content %}
-    <header class='profile-header'>
-        <a href='/profile'>
-            <span class="material-icons">arrow_back</span></a>
-        <h1>Profiel wijzigen</h1>
-    </header>
+    {% if differentProfile === true %}
+        <!-- Different profile -->
+        <header class='profile-header'>
+            <a href='/profiles/{{result._id}}'>
+                <span class="material-icons">arrow_back</span></a>
+            <h1>Profiel wijzigen</h1>
+        </header>
 
-    <section class='profile-settings'>
-        <form action='#' method='post' enctype='multipart/form-data'>
-            <div class='settings-banner'>
-                <img class='output-banner' src={{result.banner.path}}></img>
-                <span class="material-icons-outlined">add</span>
-                <label for='banner'></label>
-                <input id='banner' type='file' name='banner' accept='image/*' required>
-            </div>
-            <div class='settings-avatar'>
-                <img class='output-avatar' src={{result.avatar.path}}></img>
-                <span class="material-icons-outlined">add</span>
-                <label for='avatar'></label>
-                <input id='avatar' type='file' name='avatar' accept='image/*' required>
-            </div>
-            <div class='settings-text settings-name'>
-                <label for='name'>Naam</label>
-                <input id='name' type='text' name='name' required maxlength='20' value={{result.name}}>
-            </div>
-            <div class='settings-text settings-description'>
-                <label for='description'>Beschrijving</label>
-                <textarea id='description' type='text' name='description' required maxlength='120'>{{result.description}}</textarea>
-            </div>
-            <div class='settings-text'>
-                {% for category in categories %}
-                    <div>
-                        <label for={{category}}>{{category}}</label>
-                        <input id='{{category}}' type='radio' name='category' value={{category}}>
-                    </div>
-                {% endfor %}
-            </div>
+        <section class='profile-settings'>
+            <form action='#' method='post' enctype='multipart/form-data'>
+                <div class='settings-banner'>
+                    <img class='output-banner' src={{result.banner.path}}></img>
+                    <span class="material-icons-outlined">add</span>
+                    <label for='banner'></label>
+                    <input id='banner' type='file' name='banner' accept='image/*' required>
+                </div>
+                <div class='settings-avatar'>
+                    <img class='output-avatar' src={{result.avatar.path}}></img>
+                    <span class="material-icons-outlined">add</span>
+                    <label for='avatar'></label>
+                    <input id='avatar' type='file' name='avatar' accept='image/*' required>
+                </div>
+                <div class='settings-text settings-name'>
+                    <label for='name'>Naam</label>
+                    <input id='name' type='text' name='name' required maxlength='20' value={{result.name}}>
+                </div>
+                <div class='settings-text settings-description'>
+                    <label for='description'>Beschrijving</label>
+                    <textarea id='description' type='text' name='description' required maxlength='120'>{{result.description}}</textarea>
+                </div>
+                <div class='settings-text'>
+                    {% for category in categories %}
+                        <div>
+                            <label for={{category}}>{{category}}</label>
+                            <input id='{{category}}' type='radio' name='category' value={{category}}>
+                        </div>
+                    {% endfor %}
+                </div>
 
-            <button type='submit'>Opslaan</button>
-        </form>
-    </section>
+                <button type='submit'>Opslaan</button>
+            </form>
+        </section>
+    {% else %}
+        <!-- Own profile -->
+        <header class='profile-header'>
+            <a href='/profile'>
+                <span class="material-icons">arrow_back</span></a>
+            <h1>Profiel wijzigen</h1>
+        </header>
+
+        <section class='profile-settings'>
+            <form action='#' method='post' enctype='multipart/form-data'>
+                <div class='settings-banner'>
+                    <img class='output-banner' src={{profile.banner}}></img>
+                    <span class="material-icons-outlined">add</span>
+                    <label for='banner'></label>
+                    <input id='banner' type='file' name='banner' accept='image/*' required>
+                </div>
+                <div class='settings-avatar'>
+                    <img class='output-avatar' src={{profile.avatar}}></img>
+                    <span class="material-icons-outlined">add</span>
+                    <label for='avatar'></label>
+                    <input id='avatar' type='file' name='avatar' accept='image/*' required>
+                </div>
+                <div class='settings-text settings-name'>
+                    <label for='name'>Naam</label>
+                    <input id='name' type='text' name='name' required maxlength='20' value={{profile.name}}>
+                </div>
+                <div class='settings-text settings-description'>
+                    <label for='description'>Beschrijving</label>
+                    <textarea id='description' type='text' name='description' required maxlength='120'>{{profile.description}}</textarea>
+                </div>
+                <div class='settings-text'>
+                    {% for category in categories %}
+                        <div>
+                            <label for={{category}}>{{category}}</label>
+                            <input id='{{category}}' type='radio' name='category' value={{category}}>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button type='submit'>Opslaan</button>
+            </form>
+        </section>
+    {% endif %}
+
 {% endblock %}
 
 {% block scripts %}

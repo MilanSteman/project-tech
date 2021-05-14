@@ -10,7 +10,7 @@ const router = express.Router();
 const categories = ["Games", "Sports", "Movies"];
 
 // Variable for our current profile (no login yet)
-const profile = {
+let profile = {
   _id: "0",
   name: "milan",
   description: "Test!",
@@ -33,7 +33,7 @@ const client = new MongoClient(uri, {
 
 client.connect((err) => {
   if (err) throw err;
-  console.log("connected");
+  console.log("Connected to database");
   db = client.db(process.env.DB_NAME);
 });
 
@@ -82,7 +82,9 @@ router.get("/profile", (req, res) => {
   res.render("profile.njk", { profile, differentProfile });
 });
 
-router.get("/profile-settings", (req, res) => {
+router.get("/profile-settings", (req, res, user) => {
+  // Set different profile to false
+  differentProfile = false;
   res.render("profile-settings.njk", { profile, categories });
 });
 
@@ -91,29 +93,52 @@ router.get("/profile-settings", (req, res) => {
  * This creates a new user from data provided by the user on the profile settings page.
  * It will insert data into the collection 'users' and redirect the user to the created page with a slug of the user ID.
  */
-router.post(
+ router.post(
   "/profile-settings",
   upload.fields([
     { name: "banner", maxCount: 1 },
     { name: "avatar", maxCount: 1 },
   ]),
   (req, res, user) => {
-    // Create an user to insert the necessary data into the database
+    // Create user 
     user = {
+      _id: "0",
       name: req.body.name,
+      avatar: `uploads/${req.files.avatar[0].filename}`,
+      banner: `uploads/${req.files.banner[0].filename}`,
       description: req.body.description,
       category: req.body.category,
-      avatar: req.files.avatar[0],
-      banner: req.files.banner[0],
-    };
+    }
 
-    // Insert the variable above into the collection 'users' within the database.
-    db.collection("users").insertOne(user);
+    profile = user;
 
-    // Automatically redirect to the created user
-    res.redirect(`/profiles/${user._id}`);
+    res.redirect("/profile");
   }
 );
+
+// router.post(
+//   "/profile-settings",
+//   upload.fields([
+//     { name: "banner", maxCount: 1 },
+//     { name: "avatar", maxCount: 1 },
+//   ]),
+//   (req, res, user) => {
+//     // Create an user to insert the necessary data into the database
+//     user = {
+//       name: req.body.name,
+//       description: req.body.description,
+//       category: req.body.category,
+//       avatar: req.files.avatar[0],
+//       banner: req.files.banner[0],
+//     };
+
+//     // Insert the variable above into the collection 'users' within the database.
+//     db.collection("users").insertOne(user);
+
+//     // Automatically redirect to the created user
+//     res.redirect(`/profiles/${user._id}`);
+//   }
+// );
 
 /**
  * This will render a profile from an existing user with its data attached to it. It is done by looking for the
@@ -165,8 +190,14 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
       result.banner.path = `../../uploads/${result.banner.filename}`;
       result.avatar.path = `../../uploads/${result.avatar.filename}`;
 
+      differentProfile = true;
+
       // Render the profile of the given user
-      res.render("profile-settings.njk", { result, categories });
+      res.render("profile-settings.njk", {
+        result,
+        categories,
+        differentProfile,
+      });
     }
   );
 });
