@@ -6,9 +6,24 @@ require("dotenv").config();
 
 const router = express.Router();
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yxc1m.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+// Variable for rendering the available categories
+const categories = ["Games", "Sports", "Movies"];
 
+// Variable for our current profile (no login yet)
+const profile = {
+  message: "Welkom terug, milan.",
+  displayname: "milan",
+  username: "milannn",
+  title: "Home",
+  picture: "images/profile-picture.jpg",
+  banner: "images/michael.jpg",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  category: "Games",
+};
+
+// Set up database
 let db = null;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yxc1m.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -21,6 +36,7 @@ client.connect((err) => {
   db = client.db(process.env.DB_NAME);
 });
 
+// Set up multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "static/public/uploads");
@@ -32,51 +48,35 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const categories = ["Games", "Sports", "Movies"];
+/**
+ * Renders a list of current users on the homepage who match your chosen category.
+ */
+router.get("/", (req, res, recommendedUsers) => {
+  // Find all users
+  db.collection("users")
+    .find({})
+    .toArray((err, result) => {
+      // Check for errors
+      if (err) throw err;
 
-const profile = {
-  message: "Welkom terug, milan.",
-  displayname: "milan",
-  username: "milannn",
-  title: "Home",
-  picture: "images/profile-picture.jpg",
-  banner: "images/michael.jpg",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      // Fix the destination to uploaded images for each result
+      result.forEach((result) => {
+        result.banner.path = `../../uploads/${result.banner.filename}`;
+        result.avatar.path = `../../uploads/${result.avatar.filename}`;
+      });
 
-  posts: ["images/michael.jpg", "images/michael.jpg", "images/michael.jpg"],
-};
+      // Filter for the results that match your category (from the object profile)
+      recommendedUsers = result.filter((match) =>
+        match.category.includes(profile.category)
+      );
 
-// temporary array for users
-const users = [
-  {
-    username: "Simeon Yetarian",
-    picture: "images/simeon.png",
-    description:
-      "Go and get it. Just try to bring the car back in good condition huh?",
-    games: ["GTA V", "GTA IV"],
-  },
-  {
-    username: "Franklin Clinton",
-    picture: "images/franklin.jpg",
-    description:
-      "A what? A credit fraud? Be serious dude.... I just work the repo man.",
-    games: ["GTA V", "GTA San Andreas"],
-  },
-  {
-    username: "Michael Townley",
-    picture: "images/michael.jpg",
-    description:
-      "You forget a thousand things everyday, pal. Make sure this is one of them.",
-    games: ["GTA V", "GTA San Andreas"],
-  },
-];
-
-router.get("/", (req, res) => {
-  res.render("home.njk", { profile, users });
+      // Render the homepage with the recommended users
+      res.render("home.njk", { profile, recommendedUsers });
+    });
 });
 
 router.get("/profile", (req, res) => {
-  res.render("profile.njk", { profile, users });
+  res.render("profile.njk", { profile });
 });
 
 router.get("/profile-settings", (req, res) => {
@@ -99,7 +99,7 @@ router.post(
     user = {
       name: req.body.name,
       description: req.body.description,
-      categories: req.body.categories,
+      category: req.body.category,
       avatar: req.files.avatar[0],
       banner: req.files.banner[0],
     };
@@ -154,7 +154,7 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
     (err, result) => {
       // Check for errors
       if (err) throw err;
-      console.log(result)
+      console.log(result);
 
       // Fix the destination to uploaded images
       result.banner.path = `../../uploads/${result.banner.filename}`;
@@ -185,12 +185,12 @@ router.post(
       // Search for the current userId
       { _id: ObjectID(userId) },
 
-      // Replace current data with user input
+      // Replace current data stored inside the database with current user input
       {
         $set: {
           name: req.body.name,
           description: req.body.description,
-          categories: req.body.categories,
+          category: req.body.category,
           avatar: req.files.avatar[0],
           banner: req.files.banner[0],
         },

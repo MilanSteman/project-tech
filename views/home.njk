@@ -8,23 +8,21 @@
   </header>
 
   <!-- Recommended users -->
-  {% if users.length > 0 %}
+  {% if recommendedUsers.length > 0 %}
     <section class='show-users'>
       <h1>Aanbevolen voor jou</h1>
       <ul class='user-list'>
-        {% for user in users %}
+        {% for recommendedUser in recommendedUsers %}
           <!-- User Card -->
           <li>
-            <a href='/'>
-              <img src={{user.picture}}>
-              <h3>{{user.username}}</h3>
-              <p>{{user.description}}</p>
+            <a href='/profiles/{{recommendedUser._id}}'>
+              <img src={{recommendedUser.avatar.path}}>
+              <h3>{{recommendedUser.name}}</h3>
+              <p>{{recommendedUser.description}}</p>
 
               <!-- List of games -->
               <ul>
-                {% for game in user.games %}
-                  <li>{{game}}</li>
-                {% endfor %}
+                <li>{{recommendedUser.category}}</li>
               </ul>
             </a>
           </li>

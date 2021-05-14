@@ -22,7 +22,7 @@
             </div>
             <div class='settings-text settings-name'>
                 <label for='name'>Naam</label>
-                <input id='name' type='text' name='name' required maxlength='15' value={{result.name}}>
+                <input id='name' type='text' name='name' required maxlength='20' value={{result.name}}>
             </div>
             <div class='settings-text settings-description'>
                 <label for='description'>Beschrijving</label>
@@ -32,7 +32,7 @@
                 {% for category in categories %}
                     <div>
                         <label for={{category}}>{{category}}</label>
-                        <input id='{{category}}' type='checkbox' name='categories' value={{category}}>
+                        <input id='{{category}}' type='radio' name='category' value={{category}}>
                     </div>
                 {% endfor %}
             </div>
