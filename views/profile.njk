@@ -1,19 +1,38 @@
 {% extends "layouts/layout.njk" %}
 {% block content %}
-  <header class='profile-header'>
-    <a href='/profile'>
-      <span class="material-icons">arrow_back</span></a>
-    <h1>{{result.name}}</h1>
-  </header>
+  {% if differentProfile === true %}
+    <header class='profile-header'>
+      <a href='/'>
+        <span class="material-icons">arrow_back</span></a>
+      <h1>{{result.name}}</h1>
+    </header>
 
-  <section class='profile-body'>
-    <img src={{result.banner.path}}>
-    <div>
-      <img src={{result.avatar.path}}>
-      <a href='/profile-settings'>Profiel bewerken</a>
-    </div>
-    <h2>{{result.name}}
-      <span>@{{result._id}}</span></h2>
-    <p class='description'>{{result.description}}</p>
-  </header>
+    <section class='profile-body'>
+      <img src={{result.banner.path}}>
+      <div>
+        <img src={{result.avatar.path}}>
+        <a href='/profiles/{{result._id}}/update'>Profiel bewerken</a>
+      </div>
+      <h2>{{result.name}}
+        <span>@{{result._id}}</span></h2>
+      <p class='description'>{{result.description}}</p>
+    </header>
+  {% else %}
+    <header class='profile-header'>
+      <a href='/'>
+        <span class="material-icons">arrow_back</span></a>
+      <h1>{{profile.name}}</h1>
+    </header>
+
+    <section class='profile-body'>
+      <img src={{profile.banner}}>
+      <div>
+        <img src={{profile.avatar}}>
+        <a href='/profile-settings'>Profiel bewerken</a>
+      </div>
+      <h2>{{profile.name}}
+        <span>@{{profile._id}}</span></h2>
+      <p class='description'>{{profile.description}}</p>
+    </header>
+  {% endif %}
 {% endblock %}

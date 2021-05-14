@@ -11,15 +11,16 @@ const categories = ["Games", "Sports", "Movies"];
 
 // Variable for our current profile (no login yet)
 const profile = {
-  message: "Welkom terug, milan.",
-  displayname: "milan",
-  username: "milannn",
-  title: "Home",
-  picture: "images/profile-picture.jpg",
-  banner: "images/michael.jpg",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  _id: "0",
+  name: "milan",
+  description: "Test!",
   category: "Games",
+  avatar: "images/profile-picture.jpg",
+  banner: "images/michael.jpg",
 };
+
+// Variable to check (for now) if a profile is a different profile from yours or not
+let differentProfile = null;
 
 // Set up database
 let db = null;
@@ -76,7 +77,9 @@ router.get("/", (req, res, recommendedUsers) => {
 });
 
 router.get("/profile", (req, res) => {
-  res.render("profile.njk", { profile });
+  // Set different profile to false
+  differentProfile = false;
+  res.render("profile.njk", { profile, differentProfile });
 });
 
 router.get("/profile-settings", (req, res) => {
@@ -95,7 +98,7 @@ router.post(
     { name: "avatar", maxCount: 1 },
   ]),
   (req, res, user) => {
-    // Create a variable user to insert the necessary data into the database
+    // Create an user to insert the necessary data into the database
     user = {
       name: req.body.name,
       description: req.body.description,
@@ -133,8 +136,11 @@ router.get("/profiles/:userId", (req, res, userId) => {
       result.banner.path = `../../uploads/${result.banner.filename}`;
       result.avatar.path = `../../uploads/${result.avatar.filename}`;
 
+      // Set different profile to true
+      differentProfile = true;
+
       // Render the profile of the given user
-      res.render("profile.njk", { result });
+      res.render("profile.njk", { result, differentProfile });
     }
   );
 });
@@ -154,7 +160,6 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
     (err, result) => {
       // Check for errors
       if (err) throw err;
-      console.log(result);
 
       // Fix the destination to uploaded images
       result.banner.path = `../../uploads/${result.banner.filename}`;
@@ -185,7 +190,7 @@ router.post(
       // Search for the current userId
       { _id: ObjectID(userId) },
 
-      // Replace current data stored inside the database with current user input
+      // Replace current data stored inside the database with user input
       {
         $set: {
           name: req.body.name,
