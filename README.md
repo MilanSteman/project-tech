@@ -1,6 +1,6 @@
-# Konnekt &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+# Konnect &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 ## Description
-Konnekt is a matching app made to connect you with other players around the world.
+Konnect is a matching app made to connect you with people that share the same interests as you.
 
 ## Installation
 Make sure that git is installed on your machine:

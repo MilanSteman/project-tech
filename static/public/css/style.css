@@ -103,10 +103,14 @@ h1, h2, h3, h4, h5, h6, p, a, span {
   *::before {
     overflow-x: visible;
   }
+  main .show-users .user-list > li {
+    width: calc(72.5rem / 6);
+  }
   body {
     width: 77.5rem;
     max-width: 77.5rem;
     margin: auto;
+    overflow-x: hidden;
   }
   body > nav {
     display: none;
@@ -321,11 +325,11 @@ nav ul li a span.material-icons {
   width: -moz-fit-content;
   width: fit-content;
   margin-top: 1rem;
+  gap: 1rem;
 }
 
 .show-users .user-list > li {
   width: 12rem;
-  margin-right: 1rem;
 }
 
 .show-users .user-list > li a {

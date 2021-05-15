@@ -1,7 +1,7 @@
 {
   "name": "konnekt",
-  "version": "1.0.3",
-  "description": "Konnekt is a matching app made to connect you with other players around the world.",
+  "version": "1.0.0",
+  "description": "Konnekt is a matching app made to connect you with people that share the same interests as you.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,7 +18,10 @@
     "matching-app",
     "express",
     "nunjucks",
-    "mongodb"
+    "mongodb",
+    "interests",
+    "multer",
+    "sass"
   ],
   "author": "Milan Steman",
   "license": "MIT",

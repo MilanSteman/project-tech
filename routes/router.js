@@ -16,8 +16,8 @@ let profile = {
   description:
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
   category: "Games",
-  avatar: "images/profile-picture.jpg",
-  banner: "images/michael.jpg",
+  avatar: "images/default.jpg",
+  banner: "images/default.jpg",
 };
 
 // Variable to check (for now) if a profile is a different profile from yours or not
@@ -205,7 +205,7 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
       if (err) throw err;
 
       // Fix the destination to uploaded images
-      result.banner.path = `../../uploads/${result.banner.filename}`;
+      result.banner.path = `../../uploads/${result.banner.filename}`; 
       result.avatar.path = `../../uploads/${result.avatar.filename}`;
 
       differentProfile = true;

@@ -51,10 +51,15 @@
     overflow-x: visible;
   }
 
+  main .show-users .user-list > li {
+    width: calc(72.5rem / 6);
+  }
+
   body {
     width: 77.5rem;
     max-width: 77.5rem;
     margin: auto;
+    overflow-x: hidden;
   }
 
   body > nav {
