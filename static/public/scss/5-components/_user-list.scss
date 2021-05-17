@@ -19,6 +19,10 @@
     & > li {
       width: 12rem;
 
+      &:last-of-type {
+        margin-right: $margin;
+      }
+
       a {
         width: 100%;
         height: 100%;
