@@ -13,8 +13,8 @@
   </header>
 
   <!-- Recommended users -->
-  {% if recommendedUsers.length > 0 %}
-    <section class='show-users'>
+  <section class='show-users'>
+    {% if recommendedUsers.length > 0 %}
       <h1>Aanbevolen voor jou</h1>
       <ul class='user-list'>
         {% for recommendedUser in recommendedUsers %}
@@ -33,6 +33,10 @@
           </li>
         {% endfor %}
       </ul>
-    </section>
-  {% endif %}
+
+    {% else %}
+      <h1>Geen aanbevolen gebruikers</h1>
+      <p>Pas <a href='/profile-settings' class='link-profile'>je profiel instellingen</a> aan om nieuwe gebruikers te vinden!</p>
+    {% endif %}
+  </section>
 {% endblock %}

@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 /**
  * Deze functie laat de input van de gebruiker zien bij het uploaden
  * van een profielfoto of -banner.

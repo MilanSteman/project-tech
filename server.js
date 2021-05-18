@@ -5,7 +5,7 @@ const router = require("./routes/router.js");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// static files
+// Static files
 app.use(express.static("static/public"));
 
 app.use(express.json());

@@ -54,11 +54,9 @@ const upload = multer({ storage: storage });
  * Renders a list of current users on the homepage who match your chosen category.
  */
 router.get("/", (req, res, recommendedUsers) => {
-  // Find all users
   db.collection("users")
     .find({})
     .toArray((err, result) => {
-      // Check for errors
       if (err) throw err;
 
       // Fix the destination to uploaded images for each result
@@ -72,7 +70,6 @@ router.get("/", (req, res, recommendedUsers) => {
         match.category.includes(profile.category)
       );
 
-      // Render the homepage with the recommended users
       res.render("home.njk", { profile, recommendedUsers });
     });
 });
@@ -81,7 +78,6 @@ router.get("/", (req, res, recommendedUsers) => {
  * Renders the current user profile page.
  */
 router.get("/profile", (req, res) => {
-  // Set different profile to false
   differentProfile = false;
   res.render("profile.njk", { profile, differentProfile });
 });
@@ -90,7 +86,6 @@ router.get("/profile", (req, res) => {
  * Renders the settings page for the current user profile.
  */
 router.get("/profile-settings", (req, res, user) => {
-  // Set different profile to false
   differentProfile = false;
   res.render("profile-settings.njk", { profile, categories });
 });
@@ -118,7 +113,6 @@ router.post(
     // Asign user to the profile variable
     profile = user;
 
-    // Redirect back to user page
     res.redirect("/profile");
   }
 );
@@ -172,17 +166,14 @@ router.get("/profiles/:userId", (req, res, userId) => {
       _id: ObjectId(userId),
     },
     (err, result) => {
-      // Check for errors
       if (err) throw err;
 
       // Fix the destination to uploaded images
       result.banner.path = `../../uploads/${result.banner.filename}`;
       result.avatar.path = `../../uploads/${result.avatar.filename}`;
 
-      // Set different profile to true
       differentProfile = true;
 
-      // Render the profile of the given user
       res.render("profile.njk", { result, differentProfile });
     }
   );
@@ -201,7 +192,6 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
       _id: ObjectId(userId),
     },
     (err, result) => {
-      // Check for errors
       if (err) throw err;
 
       // Fix the destination to uploaded images
@@ -231,7 +221,6 @@ router.post(
     { name: "avatar", maxCount: 1 },
   ]),
   (req, res, userId) => {
-    // Store the userId
     userId = req.params.userId;
 
     // Update the current user
