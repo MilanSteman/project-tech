@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/MilanSteman/project-tech#readme",
   "dependencies": {
-    "camelcase": "^5.3.1",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.6",
