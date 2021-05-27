@@ -2,6 +2,9 @@
 ## Description
 Konnect is a matching app made to connect you with people that share the same interests as you.
 
+## Feature
+The chosen feature consists of creating and updating a profile. The data stored ranges from user input to file input. The app will display other (recommended) users to you pulled from the database.
+
 ## Installation
 Make sure that git is installed on your machine:
 ```

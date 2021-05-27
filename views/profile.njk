@@ -1,6 +1,5 @@
 {% extends "layouts/layout.njk" %}
 {% block content %}
-  {% if differentProfile === true %}
     <!-- Different profile -->
     <header class='profile-header'>
       <div>
@@ -12,9 +11,9 @@
     </header>
 
     <section class='profile-body'>
-      <img src={{result.banner.path}}>
+      <img src={{result.banner}}>
       <div>
-        <img src={{result.avatar.path}}>
+        <img src={{result.avatar}}>
         <a href='/profiles/{{result._id}}/update'>Profiel bewerken</a>
       </div>
       <h2>{{result.name}}
@@ -22,27 +21,4 @@
       <p class='description'>{{result.description}}</p>
       <p class='description'>Category: {{result.category}}</p>
     </header>
-  {% else %}
-    <!-- Own profile -->
-    <header class='profile-header'>
-      <div>
-        <a href='/'>
-          <span class="material-icons">arrow_back</span></a>
-        <h1>{{profile.name}}</h1>
-      </div>
-      {% include "partials/header.njk" %}
-    </header>
-
-    <section class='profile-body'>
-      <img src={{profile.banner}}>
-      <div>
-        <img src={{profile.avatar}}>
-        <a href='/profile-settings'>Profiel bewerken</a>
-      </div>
-      <h2>{{profile.name}}
-        <span>@{{profile._id}}</span></h2>
-      <p class='description'>{{profile.description}}</p>
-      <p class='description'>Category: {{profile.category}}</p>
-    </header>
-  {% endif %}
 {% endblock %}

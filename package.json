@@ -1,7 +1,7 @@
 {
-  "name": "konnekt",
+  "name": "konnect",
   "version": "1.0.0",
-  "description": "Konnekt is a matching app made to connect you with people that share the same interests as you.",
+  "description": "Konnect is a matching app made to connect you with people that share the same interests as you.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -3,9 +3,9 @@
   <header class='home-header'>
     <div>
       <div>
-        <p>Welkom terug, {{profile.name}}</p>
+        <p>Welkom terug, {{myUser.name}}</p>
         <a href='/profile'>
-          <img src={{profile.avatar}}>
+          <img src='../../uploads/{{myUser.avatar}}'>
         </a>
       </div>
       {% include "partials/header.njk" %}
@@ -14,20 +14,20 @@
 
   <!-- Recommended users -->
   <section class='show-users'>
-    {% if recommendedUsers.length > 0 %}
+    {% if result.length > 0 %}
       <h1>Aanbevolen voor jou</h1>
       <ul class='user-list'>
-        {% for recommendedUser in recommendedUsers %}
+        {% for user in result %}
           <!-- User Card -->
           <li>
-            <a href='/profiles/{{recommendedUser._id}}'>
-              <img src={{recommendedUser.avatar.path}}>
-              <h3>{{recommendedUser.name}}</h3>
-              <p>{{recommendedUser.description}}</p>
+            <a href='/profiles/{{user._id}}'>
+              <img src={{user.avatar}}>
+              <h3>{{user.name}}</h3>
+              <p>{{user.description}}</p>
 
               <!-- Category -->
               <ul>
-                <li>{{recommendedUser.category}}</li>
+                <li>{{user.category}}</li>
               </ul>
             </a>
           </li>

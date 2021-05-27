@@ -9,119 +9,75 @@ const router = express.Router();
 // Variable for rendering the available categories
 const categories = ["Games", "Sports", "Movies"];
 
-// Variable for our current profile (no login yet)
-let profile = {
-  _id: "01",
-  name: "milan",
-  description:
-    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-  category: "Games",
-  avatar: "images/default.jpg",
-  banner: "images/default.jpg",
-};
-
-// Variable to check (for now) if a profile is a different profile from yours or not
-let differentProfile = null;
+// Variable for getting my user from the database
+const myId = "60af660257a900035aa3455a";
 
 // Set up database
 let db = null;
+let myUser = null;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 client.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to database");
-  db = client.db(process.env.DB_NAME);
+    if (err) throw err;
+    console.log("Connected to database");
+    db = client.db(process.env.DB_NAME);
+    db.collection("users").findOne({ _id: ObjectId(myId) }, (err, result) => {
+        if (err) throw err;
+        myUser = result;
+    });
 });
 
 // Set up multer
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "static/public/uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${file.fieldname}-${Date.now()}.jpg`);
-  },
+    destination(req, file, cb) {
+        cb(null, "static/public/uploads");
+    },
+    filename(req, file, cb) {
+        cb(null, `${file.fieldname}-${Date.now()}.jpg`);
+    },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 /**
- * Renders a list of current users on the homepage who match your chosen category.
+ * Renders a list of current users on the homepage who match your chosen category
  */
-router.get("/", (req, res, recommendedUsers) => {
-  db.collection("users")
-    .find({})
-    .toArray((err, result) => {
-      if (err) throw err;
+router.get("/", (req, res) => {
+    db.collection("users")
+        .find({
+            _id: { $ne: ObjectId(myId) },
+            category: { $eq: myUser.category },
+        })
+        .toArray((err, result) => {
+            if (err) throw err;
 
-      // Fix the destination to uploaded images for each result
-      result.forEach((result) => {
-        result.banner.path = `../../uploads/${result.banner.filename}`;
-        result.avatar.path = `../../uploads/${result.avatar.filename}`;
-      });
+            // Fix the destination to uploaded images for each result
+            result.forEach((result) => {
+                result.banner = `../../uploads/${result.banner}`;
+                result.avatar = `../../uploads/${result.avatar}`;
+            });
 
-      // Filter for the results that match your category (from the object profile)
-      recommendedUsers = result.filter((match) =>
-        match.category.includes(profile.category)
-      );
-
-      res.render("home.njk", { profile, recommendedUsers });
-    });
+            res.render("home.njk", { result, myUser });
+        });
 });
 
 /**
- * Renders the current user profile page.
+ * Renders the current user profile page
  */
 router.get("/profile", (req, res) => {
-  differentProfile = false;
-  res.render("profile.njk", { profile, differentProfile });
+    res.redirect(`/profiles/${myId}`);
 });
-
-/**
- * Renders the settings page for the current user profile.
- */
-router.get("/profile-settings", (req, res, user) => {
-  differentProfile = false;
-  res.render("profile-settings.njk", { profile, categories });
-});
-
-/**
- * This will update the current user profile. It will make a new user and assign that to the profile variable.
- */
-router.post(
-  "/profile-settings",
-  upload.fields([
-    { name: "banner", maxCount: 1 },
-    { name: "avatar", maxCount: 1 },
-  ]),
-  (req, res, user) => {
-    // Create user
-    user = {
-      _id: "01",
-      name: req.body.name,
-      avatar: `uploads/${req.files.avatar[0].filename}`,
-      banner: `uploads/${req.files.banner[0].filename}`,
-      description: req.body.description,
-      category: req.body.category,
-    };
-
-    // Asign user to the profile variable
-    profile = user;
-
-    res.redirect("/profile");
-  }
-);
 
 /**
  * Renders the page for adding a new user.
  */
 router.get("/add-user", (req, res) => {
-  res.render("add-user.njk", { categories });
+    res.render("add-user.njk", { categories });
 });
 
 /**
@@ -129,27 +85,27 @@ router.get("/add-user", (req, res) => {
  * It will insert data into the collection 'users' and redirect the user to the created page with a slug of the user ID.
  */
 router.post(
-  "/add-user",
-  upload.fields([
-    { name: "banner", maxCount: 1 },
-    { name: "avatar", maxCount: 1 },
-  ]),
-  (req, res, user) => {
-    // Create an user to insert the necessary data into the database
-    user = {
-      name: req.body.name,
-      description: req.body.description,
-      category: req.body.category,
-      avatar: req.files.avatar[0],
-      banner: req.files.banner[0],
-    };
+    "/add-user",
+    upload.fields([
+        { name: "banner", maxCount: 1 },
+        { name: "avatar", maxCount: 1 },
+    ]),
+    (req, res, user) => {
+        // Create an user to insert the necessary data into the database
+        user = {
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            avatar: req.files.avatar[0].filename,
+            banner: req.files.banner[0].filename,
+        };
 
-    // Insert the variable above into the collection 'users' within the database.
-    db.collection("users").insertOne(user);
+        // Insert the variable above into the collection 'users' within the database.
+        db.collection("users").insertOne(user);
 
-    // Automatically redirect to the created user
-    res.redirect(`/profiles/${user._id}`);
-  }
+        // Automatically redirect to the created user
+        res.redirect(`/profiles/${user._id}`);
+    }
 );
 
 /**
@@ -157,57 +113,52 @@ router.post(
  * exact userId (which can only exists once in a database).
  */
 router.get("/profiles/:userId", (req, res, userId) => {
-  // Store the userId
-  userId = req.params.userId;
+    // Store the userId
+    userId = req.params.userId;
 
-  // Find the user matching the userId
-  db.collection("users").findOne(
-    {
-      _id: ObjectId(userId),
-    },
-    (err, result) => {
-      if (err) throw err;
+    // Find the user matching the userId
+    db.collection("users").findOne(
+        {
+            _id: ObjectId(userId),
+        },
+        (err, result) => {
+            if (err) throw err;
 
-      // Fix the destination to uploaded images
-      result.banner.path = `../../uploads/${result.banner.filename}`;
-      result.avatar.path = `../../uploads/${result.avatar.filename}`;
+            // Fix the destination to uploaded images
+            result.banner = `../../uploads/${result.banner}`;
+            result.avatar = `../../uploads/${result.avatar}`;
 
-      differentProfile = true;
-
-      res.render("profile.njk", { result, differentProfile });
-    }
-  );
+            res.render("profile.njk", { result });
+        }
+    );
 });
 
 /**
  * This will render the profile settings page to update a current user.
  */
 router.get("/profiles/:userId/update", (req, res, userId) => {
-  // Store the userId
-  userId = req.params.userId;
+    // Store the userId
+    userId = req.params.userId;
 
-  // Find the user matching the userId
-  db.collection("users").findOne(
-    {
-      _id: ObjectId(userId),
-    },
-    (err, result) => {
-      if (err) throw err;
+    // Find the user matching the userId
+    db.collection("users").findOne(
+        {
+            _id: ObjectId(userId),
+        },
+        (err, result) => {
+            if (err) throw err;
 
-      // Fix the destination to uploaded images
-      result.banner.path = `../../uploads/${result.banner.filename}`; 
-      result.avatar.path = `../../uploads/${result.avatar.filename}`;
+            // Fix the destination to uploaded images
+            result.banner = `../../uploads/${result.banner}`;
+            result.avatar = `../../uploads/${result.avatar}`;
 
-      differentProfile = true;
-
-      // Render the profile of the given user
-      res.render("profile-settings.njk", {
-        result,
-        categories,
-        differentProfile,
-      });
-    }
-  );
+            // Render the profile of the given user
+            res.render("profile-settings.njk", {
+                result,
+                categories,
+            });
+        }
+    );
 });
 
 /**
@@ -215,39 +166,39 @@ router.get("/profiles/:userId/update", (req, res, userId) => {
  * exact userId (which can only exists once in a database).
  */
 router.post(
-  "/profiles/:userId/update",
-  upload.fields([
-    { name: "banner", maxCount: 1 },
-    { name: "avatar", maxCount: 1 },
-  ]),
-  (req, res, userId) => {
-    userId = req.params.userId;
+    "/profiles/:userId/update",
+    upload.fields([
+        { name: "banner", maxCount: 1 },
+        { name: "avatar", maxCount: 1 },
+    ]),
+    (req, res, userId) => {
+        userId = req.params.userId;
 
-    // Update the current user
-    db.collection("users").updateOne(
-      // Search for the current userId
-      { _id: ObjectID(userId) },
+        // Update the current user
+        db.collection("users").updateOne(
+            // Search for the current userId
+            { _id: ObjectID(userId) },
 
-      // Replace current data stored inside the database with user input
-      {
-        $set: {
-          name: req.body.name,
-          description: req.body.description,
-          category: req.body.category,
-          avatar: req.files.avatar[0],
-          banner: req.files.banner[0],
-        },
-      }
-    );
+            // Replace current data stored inside the database with user input
+            {
+                $set: {
+                    name: req.body.name,
+                    description: req.body.description,
+                    category: req.body.category,
+                    avatar: req.files.avatar[0].filename,
+                    banner: req.files.banner[0].filename,
+                },
+            }
+        );
 
-    // Automatically redirect to the updated user
-    res.redirect(`/profiles/${userId}`);
-  }
+        // Automatically redirect to the updated user
+        res.redirect(`/profiles/${userId}`);
+    }
 );
 
 // 404
 router.use((req, res, next) => {
-  res.status(404).send("404");
+    res.status(404).send("404");
 });
 
 // Export the router for use in the server
