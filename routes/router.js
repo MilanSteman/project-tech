@@ -21,16 +21,11 @@ const client = new MongoClient(uri, {
     useUnifiedTopology: true,
 });
 
-async function connectToDB() {
-    try {
-        await client.connect();
-        db = client.db(process.env.DB_NAME);
-    } finally {
-      console.log('Connected to database')
-    }
-}
-
-connectToDB();
+client.connect((err) => {
+    if (err) throw err;
+    console.log("Connected to database");
+    db = client.db(process.env.DB_NAME);
+});
 
 // Set up multer
 const storage = multer.diskStorage({
@@ -47,31 +42,29 @@ const upload = multer({ storage });
 /**
  * Renders a list of current users on the homepage who match your chosen category
  */
-router.get("/", async (req, res) => {
-    await db.collection("users").findOne(
+router.get("/", (req, res) => {
+    db.collection("users").findOne(
         {
             _id: ObjectId(myId),
         },
         (err, myUser) => {
             if (err) throw err;
-             db
-            .collection("users")
-            .find({
-                _id: { $ne: ObjectId(myId) },
-                category: { $eq: myUser.category },
-            })
-            .toArray((err, result) => {
-                if (err) throw err;
-    
-                // Fix the destination to uploaded images for each result
-                result.forEach((result) => {
-                    result.banner = `../../uploads/${result.banner}`;
-                    result.avatar = `../../uploads/${result.avatar}`;
+            db.collection("users")
+                .find({
+                    _id: { $ne: ObjectId(myId) },
+                    category: { $eq: myUser.category },
+                })
+                .toArray((err, result) => {
+                    if (err) throw err;
+
+                    // Fix the destination to uploaded images for each result
+                    result.forEach((result) => {
+                        result.banner = `../../uploads/${result.banner}`;
+                        result.avatar = `../../uploads/${result.avatar}`;
+                    });
+
+                    res.render("home.njk", { result, myUser });
                 });
-    
-                res.render("home.njk", { result, myUser });
-            });
-    
         }
     );
 });
@@ -100,7 +93,7 @@ router.post(
         { name: "banner", maxCount: 1 },
         { name: "avatar", maxCount: 1 },
     ]),
-    async (req, res) => {
+    (req, res) => {
         // Create an user to insert the necessary data into the database
         const user = {
             name: req.body.name,
@@ -111,7 +104,7 @@ router.post(
         };
 
         // Insert the variable above into the collection 'users' within the database.
-        await db.collection("users").insertOne(user);
+        db.collection("users").insertOne(user);
 
         // Automatically redirect to the created user
         res.redirect(`/profiles/${user._id}`);
@@ -122,12 +115,12 @@ router.post(
  * This will render a profile from an existing user with its data attached to it. It is done by looking for the
  * exact userId (which can only exists once in a database).
  */
-router.get("/profiles/:userId", async (req, res) => {
+router.get("/profiles/:userId", (req, res) => {
     // Store the userId
     const userId = req.params.userId;
 
     // Find the user matching the userId
-    await db.collection("users").findOne(
+    db.collection("users").findOne(
         {
             _id: ObjectId(userId),
         },
@@ -146,12 +139,12 @@ router.get("/profiles/:userId", async (req, res) => {
 /**
  * This will render the profile settings page to update a current user.
  */
-router.get("/profiles/:userId/update", async (req, res) => {
+router.get("/profiles/:userId/update", (req, res) => {
     // Store the userId
     const userId = req.params.userId;
 
     // Find the user matching the userId
-    await db.collection("users").findOne(
+    db.collection("users").findOne(
         {
             _id: ObjectId(userId),
         },
@@ -181,7 +174,7 @@ router.post(
         { name: "banner", maxCount: 1 },
         { name: "avatar", maxCount: 1 },
     ]),
-    async (req, res) => {
+    (req, res) => {
         const userId = req.params.userId;
 
         // Update the current user
