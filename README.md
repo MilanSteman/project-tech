@@ -5,6 +5,30 @@ Konnect is a matching app made to connect you with people that share the same in
 ## Feature
 The chosen feature consists of creating and updating a profile. The data stored ranges from user input to file input. The app will display other (recommended) users to you pulled from the database.
 
+## Packages used
+- dotenv
+- eslint
+- express
+- mongodb
+- multer
+- node-sass
+- nodemon
+- nunjucks
+- prettier
+
+## Database structure
+```
+Collection: **users**
+{
+    _id: ObjectId("609fec310cd4f4017c357971")                       ObjectId
+    name: "Milan"                                                   String
+    description: "Sed ut perspiciatis unde omnis iste..."           String
+    category: "Games"                                               String
+    avatar: "avatar-1621093425526.jpg"                              String
+    banner: "banner-1621093425523.jpg"                              String
+}
+```
+
 ## Installation
 Make sure that git is installed on your machine:
 ```
