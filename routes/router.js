@@ -24,10 +24,9 @@ const client = new MongoClient(uri, {
 async function connectToDB() {
     try {
         await client.connect();
-        console.log("Connected to database");
         db = client.db(process.env.DB_NAME);
-    } catch(err) {
-        console.log(err);
+    } finally {
+      console.log('Connected to database')
     }
 }
 
