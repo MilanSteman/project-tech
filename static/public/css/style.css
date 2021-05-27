@@ -40,6 +40,12 @@ header.profile-header > div:first-of-type {
   text-decoration: underline;
   color: #1552EF; }
 
+.text-link {
+  margin-top: 1rem; }
+
+.error {
+    margin-top: 2rem; }
+
 body, body > header nav ul {
   background-color: #FEFFFF; }
 
@@ -114,6 +120,7 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     .parent-top-navigation .inner-top-navigation {
       display: flex;
       width: 100%;
+      align-items: center;
       padding: 0.5rem 0; }
     .parent-top-navigation .top-navigation {
       display: flex;
@@ -205,7 +212,7 @@ nav {
     display: flex;
     width: fit-content;
     margin-top: 1rem;
-    gap: 1rem; }
+    gap: 2rem 1rem; }
     .show-users .user-list > li {
       width: 12rem; }
       .show-users .user-list > li:last-of-type {

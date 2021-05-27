@@ -201,7 +201,7 @@ router.post(
 
 // 404
 router.use((req, res, next) => {
-    res.status(404).send("404");
+    res.status(404).render("error.njk");
 });
 
 // Export the router for use in the server
