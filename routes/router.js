@@ -26,8 +26,8 @@ async function connectToDB() {
         await client.connect();
         console.log("Connected to database");
         db = client.db(process.env.DB_NAME);
-    } catch {
-        if (err) throw err;
+    } catch(err) {
+        throw err;
     }
 }
 
