@@ -13,10 +13,10 @@ app.use(express.urlencoded());
 app.use("/", router);
 
 nunjucks.configure("views", {
-  autoescape: true,
-  express: app,
+    autoescape: true,
+    express: app,
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
 });
