@@ -16,13 +16,13 @@
     <section class='profile-settings'>
         <form action='#' method='post' enctype='multipart/form-data'>
             <div class='settings-banner'>
-                <img class='output-banner' src={{result.banner}}></img>
+                <img class='output-banner' src='/uploads/{{result.banner}}'></img>
                 <span class="material-icons-outlined">add</span>
                 <label for='banner'></label>
                 <input id='banner' type='file' name='banner' accept='image/*' required>
             </div>
             <div class='settings-avatar'>
-                <img class='output-avatar' src={{result.avatar}}></img>
+                <img class='output-avatar' src='/uploads/{{result.avatar}}'></img>
                 <span class="material-icons-outlined">add</span>
                 <label for='avatar'></label>
                 <input id='avatar' type='file' name='avatar' accept='image/*' required>

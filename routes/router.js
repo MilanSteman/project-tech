@@ -43,25 +43,22 @@ const upload = multer({ storage });
  * Renders a list of current users on the homepage who match your chosen category
  */
 router.get("/", (req, res) => {
+    // Find my own user first
     db.collection("users").findOne(
         {
             _id: ObjectId(myId),
         },
         (err, myUser) => {
             if (err) throw err;
+            
+            // Serach for recommended users
             db.collection("users")
                 .find({
-                    _id: { $ne: ObjectId(myId) },
-                    category: { $eq: myUser.category },
+                    _id: { $ne: ObjectId(myId) }, // Don't look for my user
+                    category: { $eq: myUser.category }, // Search for the same category as me
                 })
                 .toArray((err, result) => {
                     if (err) throw err;
-
-                    // Fix the destination to uploaded images for each result
-                    result.forEach((result) => {
-                        result.banner = `../../uploads/${result.banner}`;
-                        result.avatar = `../../uploads/${result.avatar}`;
-                    });
 
                     res.render("home.njk", { result, myUser });
                 });
@@ -127,10 +124,6 @@ router.get("/profiles/:userId", (req, res) => {
         (err, result) => {
             if (err) throw err;
 
-            // Fix the destination to uploaded images
-            result.banner = `../../uploads/${result.banner}`;
-            result.avatar = `../../uploads/${result.avatar}`;
-
             res.render("profile.njk", { result });
         }
     );
@@ -150,10 +143,6 @@ router.get("/profiles/:userId/update", (req, res) => {
         },
         (err, result) => {
             if (err) throw err;
-
-            // Fix the destination to uploaded images
-            result.banner = `../../uploads/${result.banner}`;
-            result.avatar = `../../uploads/${result.avatar}`;
 
             // Render the profile of the given user
             res.render("profile-settings.njk", {
