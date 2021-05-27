@@ -17,8 +17,8 @@ The chosen feature consists of creating and updating a profile. The data stored 
 - prettier
 
 ## Database structure
-```
-Collection: **users**
+```Javascript
+Collection: users
 {
     _id: ObjectId("609fec310cd4f4017c357971")                       ObjectId
     name: "Milan"                                                   String
