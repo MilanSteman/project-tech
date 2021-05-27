@@ -1,16 +1,16 @@
 {
-  "extends": ["wesbos"],
+    "extends": ["wesbos"],
 
-  "rules": {
-    "no-console": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es6",
-        "printWidth": 120,
-        "tabWidth": 8,
-        "endOfLine": "auto"
-      }
-    ]
-  }
+    "rules": {
+        "no-console": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "trailingComma": "es6",
+                "printWidth": 120,
+                "tabWidth": 8,
+                "endOfLine": "auto"
+            }
+        ]
+    }
 }

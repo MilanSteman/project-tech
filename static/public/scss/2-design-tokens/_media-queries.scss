@@ -2,146 +2,146 @@
 @import "../1-settings/_variables.scss";
 
 @media screen and (max-width: 1272px) {
-  main .home-header {
-    margin-top: 1rem;
+    main .home-header {
+        margin-top: 1rem;
 
-    div {
-      width: 100%;
+        div {
+            width: 100%;
 
-      div {
-        width: 100%;
-        padding: 0;
-      }
+            div {
+                width: 100%;
+                padding: 0;
+            }
+        }
     }
-  }
 }
 
 @media screen and (min-width: 632px) {
-  body,
-  nav {
-    width: 37.5rem;
-    max-width: 37.5rem;
-    margin: auto;
-  }
+    body,
+    nav {
+        width: 37.5rem;
+        max-width: 37.5rem;
+        margin: auto;
+    }
 
-  body > nav {
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    body > nav {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-  main .profile-settings button[type="submit"] {
-    right: 0;
-  }
+    main .profile-settings button[type="submit"] {
+        right: 0;
+    }
 
-  // Phone Size
-  // Standard padding left and right
-  body > header,
-  body > main section,
-  body > main header,
-  body > main footer,
-  body > footer {
-    padding: 0;
-  }
+    // Phone Size
+    // Standard padding left and right
+    body > header,
+    body > main section,
+    body > main header,
+    body > main footer,
+    body > footer {
+        padding: 0;
+    }
 }
 
 @media screen and (min-width: 1272px) {
-  *,
-  *::after,
-  *::before {
-    overflow-x: visible;
-  }
-
-  main .show-users .user-list > li {
-    width: calc(72.5rem / 6);
-  }
-
-  body {
-    width: 77.5rem;
-    max-width: 77.5rem;
-    margin: auto;
-    overflow-x: hidden;
-  }
-
-  body > nav {
-    display: none;
-  }
-
-  body .show-users {
-    overflow-x: visible;
-    margin-top: $margin-bigger;
-  }
-
-  // profile
-
-  header.profile-header {
-    flex-direction: column;
-    height: fit-content;
-
-    & > div:first-of-type {
-      display: none;
-    }
-  }
-
-  main header div.parent-top-navigation {
-    display: flex;
-  }
-
-  .show-users .user-list {
-    flex-wrap: wrap;
-  }
-
-  main .profile-settings button[type="submit"] {
-    position: static;
-    margin-left: $margin;
-  }
-
-  .parent-top-navigation {
-    display: flex;
-    align-items: center;
-    width: 77.5rem;
-    margin: auto;
-    padding: $padding-smaller 0;
-
-    .inner-top-navigation {
-      display: flex;
-      width: 100%;
-      padding: $padding-smaller 0;
-      align-items: center;
+    *,
+    *::after,
+    *::before {
+        overflow-x: visible;
     }
 
-    .top-navigation {
-      display: flex;
-      margin-left: auto;
-      padding: $padding 0;
-
-      li {
-        margin-left: $margin-big;
-      }
+    main .show-users .user-list > li {
+        width: calc(72.5rem / 6);
     }
 
-    .logo {
-      width: 9rem;
-      margin-left: 0;
-    }
-  }
-
-  main .home-header {
-    height: fit-content;
-
-    & > div {
-      border-bottom: 0.125rem solid #f5f5f5;
+    body {
+        width: 77.5rem;
+        max-width: 77.5rem;
+        margin: auto;
+        overflow-x: hidden;
     }
 
-    div {
-      width: 100vw;
+    body > nav {
+        display: none;
+    }
 
-      div {
+    body .show-users {
+        overflow-x: visible;
+        margin-top: $margin-bigger;
+    }
+
+    // profile
+
+    header.profile-header {
+        flex-direction: column;
+        height: fit-content;
+
+        & > div:first-of-type {
+            display: none;
+        }
+    }
+
+    main header div.parent-top-navigation {
+        display: flex;
+    }
+
+    .show-users .user-list {
+        flex-wrap: wrap;
+    }
+
+    main .profile-settings button[type="submit"] {
+        position: static;
+        margin-left: $margin;
+    }
+
+    .parent-top-navigation {
         display: flex;
         align-items: center;
         width: 77.5rem;
         margin: auto;
         padding: $padding-smaller 0;
-      }
+
+        .inner-top-navigation {
+            display: flex;
+            width: 100%;
+            padding: $padding-smaller 0;
+            align-items: center;
+        }
+
+        .top-navigation {
+            display: flex;
+            margin-left: auto;
+            padding: $padding 0;
+
+            li {
+                margin-left: $margin-big;
+            }
+        }
+
+        .logo {
+            width: 9rem;
+            margin-left: 0;
+        }
     }
-  }
+
+    main .home-header {
+        height: fit-content;
+
+        & > div {
+            border-bottom: 0.125rem solid #f5f5f5;
+        }
+
+        div {
+            width: 100vw;
+
+            div {
+                display: flex;
+                align-items: center;
+                width: 77.5rem;
+                margin: auto;
+                padding: $padding-smaller 0;
+            }
+        }
+    }
 }

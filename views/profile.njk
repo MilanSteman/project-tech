@@ -3,25 +3,25 @@
   {{result.name}} / Konnect
 {% endblock %}
 {% block content %}
-    <!-- Different profile -->
-    <header class='profile-header'>
-      <div>
-        <a href='/'>
-          <span class="material-icons">arrow_back</span></a>
-        <h1>{{result.name}}</h1>
-      </div>
-      {% include "partials/header.njk" %}
-    </header>
+  <!-- Different profile -->
+  <header class='profile-header'>
+    <div>
+      <a href='/'>
+        <span class="material-icons">arrow_back</span></a>
+      <h1>{{result.name}}</h1>
+    </div>
+    {% include "partials/header.njk" %}
+  </header>
 
-    <section class='profile-body'>
-      <img src={{result.banner}}>
-      <div>
-        <img src={{result.avatar}}>
-        <a href='/profiles/{{result._id}}/update'>Profiel bewerken</a>
-      </div>
-      <h2>{{result.name}}
-        <span>@{{result._id}}</span></h2>
-      <p class='description'>{{result.description}}</p>
-      <p class='description'>Category: {{result.category}}</p>
-    </header>
+  <section class='profile-body'>
+    <img src={{result.banner}}>
+    <div>
+      <img src={{result.avatar}}>
+      <a href='/profiles/{{result._id}}/update'>Profiel bewerken</a>
+    </div>
+    <h2>{{result.name}}
+      <span>@{{result._id}}</span></h2>
+    <p class='description'>{{result.description}}</p>
+    <p class='description'>Category: {{result.category}}</p>
+  </header>
 {% endblock %}

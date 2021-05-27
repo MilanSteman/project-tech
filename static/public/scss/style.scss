@@ -12,13 +12,7 @@
     '2-design-tokens/_typography.scss';
 
 @import
-    '3-elements/_lists.scss';
-
-@import 
-    '4-skeleton/_grid.scss';
-
-@import
-    '5-components/_navigation.scss',
-    '5-components/_header-home.scss',
-    '5-components/_user-list.scss',
-    '5-components/_profile.scss';
+    '3-components/_navigation.scss',
+    '3-components/_header-home.scss',
+    '3-components/_user-list.scss',
+    '3-components/_profile.scss';

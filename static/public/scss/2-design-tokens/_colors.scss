@@ -1,16 +1,27 @@
 // Imports
-@import '../1-settings/_variables.scss';
+@import "../1-settings/_variables.scss";
 
 // Background colors
-body, body > header nav ul {
+body,
+body > header nav ul {
     background-color: $white;
 }
 
-body > header, body > footer, body > nav {
+body > header,
+body > footer,
+body > nav {
     background-color: $white;
 }
 
 // Typography colors
-h1, h2, h3, h4, h5, h6, p, a, span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span {
     color: $black;
 }
